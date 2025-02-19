@@ -9,6 +9,7 @@ You can use it with the [Fluent](https://github.com/tractorcow-farm/silverstripe
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Custom Styling](#custom-styling)
+* [Translations](#translations)
 * [Reporting Issues](#reporting-issues)
 * [Credits](#credits)
 
@@ -45,9 +46,12 @@ VanillaCookieConsent\Services\CCService:
   categories: # necessary category is added by default
     - analytics
     - marketing
-  analytics_cookie_table: # Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
+    - youtube
+  analytics_cookie_table: # e.g. Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
     _ga: '_ga_location.hostname'
     _gat: '_gat_location.hostname'
+  youtube_cookie_table: # e.g. Adds a table with the cookies used for youtube (Needs to match the category) OPTIONAL
+    cookie1: 'cookie1_location.hostname'
 ```
 
 
@@ -87,6 +91,17 @@ If you want to overwrite the default styling which are loaded from the js librar
     
 	.pm__footer{}
 }
+```
+
+## Translations
+You can add your own translations or overwrite the existing ones by adding the following to your project look into the existing translations here [translations](./lang/en.yml)
+
+For your custom categories and cookies you can add your translations like this:
+```yml
+VanillaCookieConsent\Categories:
+  Youtube: 'Youtube' # Title of the category with uppercase first letter
+  YoutubeDescription: 'This category includes cookies from Youtube.' # Description of the category with uppercase first letter
+  Youtube_Cookie_cookie1: 'Youtube Cookie' # e.g. if you use the cookie Table - use the cookie name as key with uppercase first letter | underscore | "Cookie" | underscore | "CookieName" = cookie1 like its defined in your yml config
 ```
 
 ## Reporting Issues

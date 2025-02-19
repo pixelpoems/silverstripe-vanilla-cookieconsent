@@ -1,0 +1,41 @@
+{
+    "name": "pixelpoems/silverstripe-vanilla-cookieconsent",
+    "description": "Silverstripe Vanilla CookieConsent-Module.",
+    "type": "silverstripe-vendormodule",
+    "keywords": [
+        "silverstripe",
+        "vanilla-cookieconsent",
+        "cookieconsent",
+        "javascript"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Bettina Bröthaler",
+            "homepage": "https://www.pixelpoems.com/",
+            "role": "Lead Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.4",
+        "silverstripe/cms": ">=4.0",
+        "silverstripe/framework": ">=4.0",
+        "silverstripe/vendor-plugin": ">=1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pixelpoems\\VanillaCookieConsent\\": "src/"
+        }
+    },
+    "extra": {
+        "installer-name": "silverstripe-vanilla-cookieconsent",
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        },
+        "expose": [
+            "client/dist/"
+        ]
+    }
+}

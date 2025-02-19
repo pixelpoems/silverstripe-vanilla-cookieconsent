@@ -1,0 +1,15 @@
+---
+Name: pp-vanilla-cookieconsent--extensions
+---
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - VanillaCookieConsent\Extensions\SiteConfigExtension
+
+Page:
+  extensions:
+    - VanillaCookieConsent\Extensions\PageExtension
+
+PageController:
+  extensions:
+    - VanillaCookieConsent\Extensions\PageControllerExtension

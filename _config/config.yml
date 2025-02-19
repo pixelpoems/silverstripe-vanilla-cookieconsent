@@ -1,0 +1,16 @@
+---
+Name: pp-vanilla-cookieconsent--config
+---
+VanillaCookieConsent\Services\CCService:
+  default_lang: 'de' # Default language for the cookie consent modal
+  languages: # Only used if you want to use multiple languages in combination with fluent otherwise only default_lang is necessary
+    - de
+    - en
+  categories: # necessary category is added by default
+    - analytics
+    - marketing
+  analytics_cookie_table: # Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
+    _ga: '_ga_location.hostname'
+    _gat: '_gat_location.hostname'
+
+

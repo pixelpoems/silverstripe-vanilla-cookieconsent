@@ -1,0 +1,30 @@
+en:
+  VanillaCookieConsent\Buttons:
+    AcceptAll: 'Accept all'
+    AcceptNecessary: 'Accept necessary cookies'
+    ShowPreferences: 'Manage settings'
+    SavePreferences: 'Save selection'
+  VanillaCookieConsent\ConsentModal:
+    ShowConsent: 'Cookie settings'
+    Title: 'We use cookies'
+    Description: 'We use cookies to provide you with the best possible experience.'
+  VanillaCookieConsent\PreferencesModal:
+    Title: 'Manage cookie settings'
+    CloseIconLabel: 'Close modal'
+  VanillaCookieConsent\Links:
+    PrivacyPolicy: 'Privacy Policy'
+    Imprint: 'Imprint'
+  VanillaCookieConsent\Sections:
+    FirstSectionTitle: 'Did someone say cookies?'
+    FirstSectionDescription: 'Hmmmmmm cookies! Yes, I want some!'
+    LastSectionTitle: 'More information'
+    LastSectionDescription: 'For more information, please read our {privacyLink} and {imprintLink}.'
+  VanillaCookieConsent\Categories:
+    Necessary: 'Necessary cookies'
+    NecessaryDescription: 'Necessary cookies enable basic functions and are necessary for the website to function properly.'
+    Analytics: 'Analytics cookies'
+    AnalyticsDescription: 'Analytics cookies help us understand how users interact with our website.'
+    Analytics_Cookie_ga: 'Description for _ga cookie' # ToDo
+    Analytics_Cookie_gat: 'Description for _gat cookie' # ToDo
+    Marketing: 'Marketing cookies'
+    MarketingDescription: 'Marketing cookies are used by third parties or publishers to display personalized advertising.'

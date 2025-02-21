@@ -1,10 +1,5 @@
 <% if $DisplayCookieConsent %>
-    <button id="show-consent-dialog-btn">
-        <%t VanillaCookieConsent\ConsentModal.ShowConsent 'Cookie Settings' %>
-    </button>
-
     <dialog id="dialog__cookieconsent" data-config="$JSConfig">
-
         <div class="cookieconsent__content">
             <h2>
                 <%t VanillaCookieConsent\ConsentModal.Title 'We use cookies' %>
@@ -29,16 +24,16 @@
 
         <div class="cookieconsent__footer">
             <% if $SiteConfig.ImprintPage %>
-                <a href="$SiteConfig.ImprintPage.Link">
-                    <%t VanillaCookieConsent\Links.PrivacyPolicy 'PrivacyPolicy' %>
-                </a>
+                <a href="$SiteConfig.ImprintPage.Link"><%t VanillaCookieConsent\Links.PrivacyPolicy 'PrivacyPolicy' %></a>
             <% end_if %>
 
             <% if $SiteConfig.DataProtectionPage %>
-                <a href="$SiteConfig.DataProtectionPage.Link">
-                    <%t VanillaCookieConsent\Links.Imprint 'Imprint' %>
-                </a>
+                <a href="$SiteConfig.DataProtectionPage.Link"><%t VanillaCookieConsent\Links.Imprint 'Imprint' %></a>
             <% end_if %>
         </div>
     </dialog>
+    
+    <button id="cookieconsent__settings-btn">
+        <%t VanillaCookieConsent\ConsentModal.ShowConsent 'Cookie Settings' %>
+    </button>    
 <% end_if %>

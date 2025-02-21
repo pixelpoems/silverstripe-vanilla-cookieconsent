@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function initShowButton() {
-        const showConsentDialogBtn = document.querySelector('#show-consent-dialog-btn');
+        const showConsentDialogBtn = document.querySelector('#cookieconsent__settings-btn');
         if(!showConsentDialogBtn) return;
 
         showConsentDialogBtn.addEventListener('click', () => {

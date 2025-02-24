@@ -38,7 +38,6 @@ class SiteConfigExtension extends DataExtension
                TextField::create('TextBlockTitle', 'Text Block Title'),
                HTMLEditorField::create('TextBlockDescription', 'Text Block Description')
                 ->setRows(5)
-               ->set
            )->setTitle('Text Block')
             ->setDescription('This text block will be displayed in the preferences modal above the categories')
         ]);

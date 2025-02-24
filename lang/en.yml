@@ -14,11 +14,6 @@ en:
   VanillaCookieConsent\Links:
     PrivacyPolicy: 'Privacy Policy'
     Imprint: 'Imprint'
-  VanillaCookieConsent\Sections:
-    FirstSectionTitle: 'Did someone say cookies?'
-    FirstSectionDescription: 'Hmmmmmm cookies! Yes, I want some!'
-    LastSectionTitle: 'More information'
-    LastSectionDescription: 'For more information, please read our {privacyLink} and {imprintLink}.'
   VanillaCookieConsent\Categories:
     Necessary: 'Necessary cookies'
     NecessaryDescription: 'Necessary cookies enable basic functions and are necessary for the website to function properly.'

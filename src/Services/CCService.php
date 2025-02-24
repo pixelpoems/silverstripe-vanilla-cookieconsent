@@ -6,7 +6,10 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Core\Manifest\ModuleLoader;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\View\ViewableData;
+use SilverStripe\View\ViewableData_Customised;
 use TractorCow\Fluent\Model\Locale;
 use TractorCow\Fluent\State\FluentState;
 
@@ -75,10 +78,14 @@ class CCService extends Controller
 
         $categorySections = [];
 
-        $categorySections[] = [
-            'title' => _t('VanillaCookieConsent\Sections.FirstSectionTitle', 'Somebody said ... cookies?'),
-            'description' => _t('VanillaCookieConsent\Sections.FirstSectionDescription', 'I want one!')
-        ];
+        if(SiteConfig::current_site_config()->TextBlockTitle ||SiteConfig::current_site_config()->TextBlockDescription) {
+            $descripiton = DBHTMLText::create_field('HTMLText',  SiteConfig::current_site_config()->TextBlockDescription);
+
+            $categorySections[] = [
+                'title' => SiteConfig::current_site_config()->TextBlockTitle,
+                'description' => $descripiton?->AbsoluteLinks()
+            ];
+        }
 
         $categorySections[] = [
             'title' => _t('VanillaCookieConsent\Categories.Necessary', 'Necessary'),
@@ -120,16 +127,6 @@ class CCService extends Controller
 
             $categorySections[] = $categoryData;
         }
-
-        $privacyLink = SiteConfig::current_site_config()->DataProtectionPage()?->Link();
-        $imprintLink = SiteConfig::current_site_config()->ImprintPage()?->Link();
-        $categorySections[] = [
-            'title' => _t('VanillaCookieConsent\Sections.LastSectionTitle', 'More information'),
-            'description' => _t('VanillaCookieConsent\Sections.LastSectionDescription', 'For more information, please visit our {privacyLink} or {imprintLink}.', [
-                'privacyLink' => "<a href='{$privacyLink}'>" . _t('VanillaCookieConsent\Links.PrivacyPolicy', 'Privacy Policy') . '</a>',
-                'imprintLink' => "<a href='{$imprintLink}'>" . _t('VanillaCookieConsent\Links.Imprint', 'Imprint') . '</a>'
-            ])
-        ];
 
         $data['preferencesModal']['sections'] = array_values($categorySections);
         return $data;

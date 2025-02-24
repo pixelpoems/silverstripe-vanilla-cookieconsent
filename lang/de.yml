@@ -14,11 +14,6 @@ de:
   VanillaCookieConsent\Links:
     PrivacyPolicy: 'Datenschutz'
     Imprint: 'Impressum'
-  VanillaCookieConsent\Sections:
-    FirstSectionTitle: 'Hat jemand Kekse gesagt?'
-    FirstSectionDescription: 'Hmmmmmm Kekse! Ja ich will welche!'
-    LastSectionTitle: 'Mehr Informationen'
-    LastSectionDescription: 'Für weitere Informationen lesen Sie bitte unsere {privacyLink} und {imprintLink}.'
   VanillaCookieConsent\Categories:
     Necessary: 'Notwendige Cookies'
     NecessaryDescription: 'Notwendige Cookies ermöglichen grundlegende Funktionen und sind für die einwandfreie Funktion der Website erforderlich.'

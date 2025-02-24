@@ -35,7 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
             language: consentConfig.language
         }).then(() => {
             // Show dialog if consent is not valid
-            if (!cc.validConsent() && consentDialog) consentDialog.showModal();
+            if (!cc.validConsent() && consentDialog) {
+                consentDialog.showModal();
+                consentDialog.focus();
+            }
         });
 
     }, 500);

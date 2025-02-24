@@ -50,14 +50,55 @@ VanillaCookieConsent\Services\CCService:
   categories: # necessary category is added by default
     - analytics
     - marketing
-    - youtube
   analytics_cookie_table: # e.g. Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
     _ga: '_ga_location.hostname'
     _gat: '_gat_location.hostname'
-  youtube_cookie_table: # e.g. Adds a table with the cookies used for youtube (Needs to match the category) OPTIONAL
-    cookie1: 'cookie1_location.hostname'
 ```
 
+#### Example Configuration
+Here are some example for the config (The Base Translations for those are already included in the module):
+
+##### YouTube
+```yml
+  categories: # necessary category is added by default
+    - marketing
+    - functional
+  marketing_cookie_table:
+    VISITOR_INFO1_LIVE: 'youtube.com (3rd party)'
+    VISITOR_PRIVACY_METADATA: 'youtube.com (3rd party)'
+  functional_cookie_table:
+    GPS: 'youtube.com (3rd party)'
+    YSC: 'youtube.com (3rd party)'
+    PREF: 'youtube.com (3rd party)'
+    DEVICE_INFO: 'youtube.com (3rd party)'
+    LOGIN_INFO: 'youtube.com (3rd party)'
+```
+
+##### Vimeo
+```yml
+  categories: # necessary category is added by default
+    - analytics
+    - functional
+  analytics_cookie_table:
+    vuid: 'vimeo.com'
+    sd_identity: 'vimeo.com'
+    sd_client_id: 'vimeo.com'
+  functional_cookie_table:
+    Player: 'vimeo.com'
+    continuous_play_v3: 'vimeo.com'
+```
+
+#### Google (reduced)
+```yml
+  categories: # necessary category is added by default
+    - analytics
+  analytics_cookie_table:
+    _ga: '' # Google Analytics
+    _gat: '' # Google Analytics
+    _gid: '' # Google Analytics
+    _gcl_au: '' # Google
+    _gcl_aw: '' # Google Ads
+```
 
 ## Custom Styling
 [//]: # (ToDo: Add custom styling instructions)

@@ -14,12 +14,38 @@ de:
   VanillaCookieConsent\Links:
     PrivacyPolicy: 'Datenschutz'
     Imprint: 'Impressum'
+  VanillaCookieConsent\CookieTable:
+    Cookie: 'Cookie'
+    Domain: 'Domain'
+    Description: 'Beschreibung'
   VanillaCookieConsent\Categories:
-    Necessary: 'Notwendige Cookies'
+    Necessary: 'Notwendige'
     NecessaryDescription: 'Notwendige Cookies ermöglichen grundlegende Funktionen und sind für die einwandfreie Funktion der Website erforderlich.'
-    Analytics: 'Analyse-Cookies'
+    ##
+    Analytics: 'Analyse'
     AnalyticsDescription: 'Analyse-Cookies helfen uns, das Nutzungsverhalten auf unserer Website zu verstehen.'
-    Analytics_Cookie_ga: 'Beschreibung für _ga Cookie' # ToDo
-    Analytics_Cookie_gat: 'Beschreibung für _gat Cookie' # ToDo
-    Marketing: 'Marketing-Cookies'
+    Analytics_Cookie__ga: 'ID zur Identifizierung von Benutzern'
+    Analytics_Cookie__gat: 'Wird verwendet, um die Anzahl der Google Analytics-Serveranfragen zu überwachen, wenn Google Tag Manager verwendet wird'
+    Analytics_Cookie__gid: 'ID zur Identifizierung von Benutzern für 24 Stunden nach der letzten Aktivität'
+    Analytics_Cookie__gcl_au: 'Wird von Google AdSense verwendet, um die Effizienz von Werbung auf Websites zu testen, die ihre Dienste nutzen.'
+    Analytics_Cookie__gcl_aw: 'Google verwendet Cookies für Werbung, einschließlich der Bereitstellung und Anzeige von Anzeigen, der Personalisierung von Anzeigen (abhängig von Ihren Anzeigeneinstellungen unter g.co/adsettings), der Begrenzung der Anzahl der Anzeigen, die einem Benutzer angezeigt werden, dem Stummschalten von Anzeigen, die Sie nicht mehr sehen möchten, und der Messung der Effektivität von Anzeigen.'
+    Analytics_Cookie_td: 'Registriert statistische Daten zum Nutzerverhalten auf der Website. Wird für interne Analysen durch den Website-Betreiber verwendet.'
+    Analytics_Cookie_vuid: 'Dieses First-Party-Cookie von Vimeo wird verwendet, um eine eindeutige Vimeo-Analyse-ID zuzuweisen.'
+    Analytics_Cookie_sd_identity: 'Sammelt analytische Tracking-Informationen über Videos und ermöglicht es dem Player, ordnungsgemäß zu funktionieren.'
+    Analytics_Cookie_sd_client_id: 'Sammelt analytische Tracking-Informationen über Videos und ermöglicht es dem Player, ordnungsgemäß zu funktionieren.'
+    ##
+    Marketing: 'Marketing'
     MarketingDescription: 'Marketing-Cookies werden von Drittanbietern oder Publishern verwendet, um personalisierte Werbung anzuzeigen.'
+    Marketing_Cookie__gac_: 'Enthält Informationen zu den Marketingkampagnen des Benutzers. Diese werden mit Google AdWords / Google Ads geteilt, wenn die Google Ads- und Google Analytics-Konten miteinander verknüpft sind.'
+    Marketing_Cookie_VISITOR_INFO1_LIVE: 'Versucht, die Bandbreite der Benutzer auf Seiten mit integrierten YouTube-Videos zu schätzen.'
+    Marketing_Cookie_VISITOR_PRIVACY_METADATA: 'Youtube-Besucherdatenschutz-Metadaten-Cookie'
+    ##
+    Functional: 'Funktional'
+    FunctionalDescription: 'Funktionale Cookies ermöglichen es der Website, erweiterte Funktionalitäten und Personalisierung bereitzustellen.'
+    Functional_Cookie_GPS: 'Registriert eine eindeutige ID auf mobilen Geräten, um das Tracking basierend auf dem geografischen GPS-Standort zu ermöglichen.'
+    Functional_Cookie_YSC: 'Registriert eine eindeutige ID, um Statistiken darüber zu führen, welche Videos von YouTube der Benutzer gesehen hat.'
+    Functional_Cookie_PREF: 'Dieses Cookie speichert Ihre Einstellungen und andere Informationen, insbesondere die bevorzugte Sprache, wie viele Suchergebnisse auf Ihrer Seite angezeigt werden sollen, und ob der Google SafeSearch-Filter aktiviert sein soll.'
+    Functional_Cookie_DEVICE_INFO: 'Wird verwendet, um zu erkennen, ob der Besucher die Marketingkategorie im Cookie-Banner akzeptiert hat. Dieses Cookie ist für die DSGVO-Konformität der Website erforderlich.'
+    Functional_Cookie_LOGIN_INFO: 'Dieses Cookie wird verwendet, um auf der Website eingebettete YouTube-Videos abzuspielen.'
+    Functional_Cookie_Player: 'Dieses First-Party-Cookie von Vimeo wird verwendet, um die Playermoduspräferenzen des Benutzers zu speichern.'
+    Functional_Cookie_continuous_play_v3: 'Wird verwendet, um zu verfolgen, ob die kontinuierliche Wiedergabe für einen Benutzer aktiviert ist oder nicht.'

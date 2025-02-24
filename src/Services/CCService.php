@@ -110,16 +110,16 @@ class CCService extends Controller
                     $cookieTableData[] = [
                         'name' => $cookie,
                         'domain' => $domain,
-                        'desc' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie' . $cookie, '__ COOKIE DESCRIPTION (' . ucfirst($category) . '_Cookie' . $cookie . ')')
+                        'desc' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie, '__ COOKIE DESCRIPTION (' . ucfirst($category) . '_Cookie' . $cookie . ')')
                     ];
                 }
 
                 $categoryData['cookieTable'] = [
-                    'caption' => 'Cookie Table', // ToDo: Translate
+//                    'caption' => 'Cookie Table',
                     'headers' => [
-                        'name' => 'Cookie', // ToDo: Translate
-                        'domain' => 'Domain', // ToDo: Translate
-                        'desc' => 'Description', // ToDo: Translate
+                        'name' => _t('VanillaCookieConsent\CookieTable.Cookie', 'Cookie'),
+                        'domain' => _t('VanillaCookieConsent\CookieTable.Domain', 'Domain'),
+                        'desc' => _t('VanillaCookieConsent\CookieTable.Description', 'Description'),
                     ],
                     'body' => $cookieTableData
                 ];

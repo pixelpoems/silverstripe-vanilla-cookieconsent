@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if(consentDialog) consentConfigData = consentDialog.dataset.ccConfig;
     else consentConfigData = document.body.dataset.ccConfig;
 
-    let consentConfig = null;
-    if(consentConfigData) consentConfig = JSON.parse(consentConfigData);
+    let consentConfig;
+    if(consentConfigData) {
+        consentConfig = JSON.parse(consentConfigData);
+    }
     else {
         console.error('No valid config for cookie consent given.');
         return;

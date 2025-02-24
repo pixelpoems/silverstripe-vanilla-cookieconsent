@@ -1,5 +1,5 @@
 <% if $DisplayCookieConsent %>
-    <dialog id="dialog__cookieconsent" data-config="$JSConfig">
+    <dialog id="dialog__cookieconsent" data-cc-config="$CCJSConfig">
         <div class="cookieconsent__content">
             <h2>
                 <%t VanillaCookieConsent\ConsentModal.Title 'We use cookies' %>

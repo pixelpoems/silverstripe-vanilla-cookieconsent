@@ -26,12 +26,16 @@ composer require pixelpoems/silverstripe-vanilla-cookieconsent
 
 ## Configuration
 ### Template
-Include the template like this:
+If you want the cookie config in consent mode include the template like this:
 ```ss
  <% include CookieConsent %>
 ```
+The other option is to pass the config via the body tag like this:
+```
+<body data-cc-config="$CCJSConfig">
+```
 
-It will not be displayed on "Security" Pages (Login, Register, ForgotPassword, ResetPassword) and on the Admin Area.
+The consent will NOT be displayed on "Security" Pages (Login, Register, ForgotPassword, ResetPassword) and on the Admin Area.
 Furthermore, you can hide it on specific pages by checking the "Hide Cookie Consent" checkbox in the CMS (Page Settings).
 
 ### YML Configuration
@@ -112,3 +116,7 @@ features you're missing.
 ## Credits
 Cookie Consent from https://cookieconsent.orestbida.com/
 
+
+
+
+https://jkwakman.github.io/Open-Cookie-Database/open-cookie-database.html

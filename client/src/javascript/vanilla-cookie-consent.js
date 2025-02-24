@@ -2,19 +2,27 @@ import * as cc from 'vanilla-cookieconsent';
 
 document.addEventListener('DOMContentLoaded', () => {
     const consentDialog = document.querySelector('#dialog__cookieconsent');
-    if(!consentDialog) return;
 
-    const consentConfigData = consentDialog.dataset.config;
-    const consentConfig = JSON.parse(consentConfigData);
-    if(!consentConfig) return;
+    let consentConfigData;
+    if(consentDialog) consentConfigData = consentDialog.dataset.ccConfig;
+    else consentConfigData = document.body.dataset.ccConfig;
 
-    initShowButton();
-    initAcceptButtons();
-    initPrefsButton();
+    let consentConfig = null;
+    if(consentConfigData) consentConfig = JSON.parse(consentConfigData);
+    else {
+        console.error('No valid config for cookie consent given.');
+        return;
+    }
+
+    if(consentDialog) {
+        initShowButton();
+        initAcceptButtons();
+        initPrefsButton();
+    }
 
     setTimeout(() => {
         cc.run({
-            autoShow: false,
+            autoShow: !consentDialog,
             categories: {
                 necessary: {
                     enabled: true,  // this category is enabled by default
@@ -25,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             language: consentConfig.language
         }).then(() => {
             // Show dialog if consent is not valid
-            if (!cc.validConsent()) consentDialog.showModal();
+            if (!cc.validConsent() && consentDialog) consentDialog.showModal();
         });
 
     }, 500);

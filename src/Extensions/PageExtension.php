@@ -40,9 +40,9 @@ class PageExtension extends DataExtension
 
     }
 
-    public function getJSConfig()
+    public function getCCJSConfig()
     {
         $service = CCService::create();
-        return $service->JSConfig();
+        return $service->CCJSConfig();
     }
 }

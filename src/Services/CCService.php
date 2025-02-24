@@ -15,7 +15,7 @@ class CCService extends Controller
     use Injectable;
     use Configurable;
 
-    public function JSConfig(): string
+    public function CCJSConfig(): string
     {
         $config = [
             'categories' => [],
@@ -48,7 +48,7 @@ class CCService extends Controller
             ];
         }
 
-        $this->extend('updateJSConfig', $config);
+        $this->extend('updateCCJSConfig', $config);
 
         return json_encode($config, JSON_OBJECT_AS_ARRAY);
     }

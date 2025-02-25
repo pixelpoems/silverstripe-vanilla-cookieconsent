@@ -31,8 +31,4 @@
             </div>
         </div>
     </dialog>
-
-    <button id="cookieconsent__settings-btn">
-        <%t VanillaCookieConsent\ConsentModal.ShowConsent 'Cookie Settings' %>
-    </button>
 <% end_if %>

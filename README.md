@@ -28,7 +28,7 @@ composer require pixelpoems/silverstripe-vanilla-cookieconsent
 ### Template
 If you want the cookie config in consent mode include the template like this:
 ```ss
- <% include CookieConsent %>
+ <% include Pixelpoems\CookieConsent %>
 ```
 The other option is to pass the config via the body tag like this:
 ```
@@ -37,6 +37,13 @@ The other option is to pass the config via the body tag like this:
 
 The consent will NOT be displayed on "Security" Pages (Login, Register, ForgotPassword, ResetPassword) and on the Admin Area.
 Furthermore, you can hide it on specific pages by checking the "Hide Cookie Consent" checkbox in the CMS (Page Settings).
+
+If you want to add an "Open Modal" button you can add this in your template:
+```ss
+<button id="cookieconsent__settings-btn">
+    <%t VanillaCookieConsent\ConsentModal.ShowConsent 'Cookie Settings' %>
+</button>
+```
 
 ### YML Configuration
 You can configure the cookies via the YML config. The following options are available:

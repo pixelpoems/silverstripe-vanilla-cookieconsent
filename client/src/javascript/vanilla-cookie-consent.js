@@ -44,6 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(() => {
             // Show dialog if consent is not valid
             if (!cc.validConsent() && consentDialog) {
+                document.onkeyup = function(e) {
+                    if (e.key === 'Escape') {
+                        // We need to show the dialog again if it was closed
+                        consentDialog.showModal();
+                    }
+                };
+
                 consentDialog.showModal();
                 consentDialog.focus();
 
@@ -97,9 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
         prefsBtn.addEventListener('click', () => {
             consentDialog.close();
 
+            const overlay = document.querySelector('.pm-overlay');
+            if(overlay) {
+                document.onkeyup = function(e) {
+                    if (e.key === 'Escape') {
+                        consentDialog.showModal();
+                    }
+                }
+
+                overlay.addEventListener('click', () => {
+                    consentDialog.showModal();
+                    document.onkeyup = null;
+                });
+            }
+
             const closePrefsBtn = document.querySelector('.pm__close-btn');
             closePrefsBtn.addEventListener('click', () => {
                 consentDialog.showModal();
+                document.onkeyup = null;
             })
         })
     }

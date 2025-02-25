@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let consentConfigData;
     if(consentDialog) {
         consentConfigData = consentDialog.dataset.ccConfig;
-        dialogPolyfill.registerDialog(consentConfigData);
+        dialogPolyfill.registerDialog(consentDialog);
     }
     else consentConfigData = document.body.dataset.ccConfig;
 
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const ccDialog = document.querySelector('#cc-main .cm-wrapper');
                     if(ccDialog) {
                         ccDialog.remove();
-                        console.log('Default cookie consent dialog removed.');
+                        // console.log('Default cookie consent dialog removed.');
                         removedCCDefaultDialog = true;
                     }
                 }

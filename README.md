@@ -62,11 +62,11 @@ Here are some example for the config (The Base Translations for those are alread
 ```yml
   categories: # necessary category is added by default
     - marketing
-    - functional
+    - analytics
   marketing_cookie_table:
     VISITOR_INFO1_LIVE: 'youtube.com (3rd party)'
     VISITOR_PRIVACY_METADATA: 'youtube.com (3rd party)'
-  functional_cookie_table:
+  analytics_cookie_table:
     GPS: 'youtube.com (3rd party)'
     YSC: 'youtube.com (3rd party)'
     PREF: 'youtube.com (3rd party)'
@@ -78,12 +78,10 @@ Here are some example for the config (The Base Translations for those are alread
 ```yml
   categories: # necessary category is added by default
     - analytics
-    - functional
   analytics_cookie_table:
     vuid: 'vimeo.com'
     sd_identity: 'vimeo.com'
     sd_client_id: 'vimeo.com'
-  functional_cookie_table:
     Player: 'vimeo.com'
     continuous_play_v3: 'vimeo.com'
 ```
@@ -100,13 +98,16 @@ Here are some example for the config (The Base Translations for those are alread
     _gcl_aw: '' # Google Ads
 ```
 
+## Script Management
+See the docs here: https://cookieconsent.orestbida.com/advanced/manage-scripts.html
+
 ## Custom Styling
 [//]: # (ToDo: Add custom styling instructions)
 
 If you want to overwrite the default styling which are loaded from the js library, you can do this by adding the following CSS to your project:
 ```scss
 // Prefs Window
-#cc-main#cc-main { // You need to double the id to override the default styles which are loaded via module
+#cc-main {
 	--cc-btn-border-radius: 0px;
 	--cc-btn-primary-bg: var(--color-primary);
 	--cc-btn-secondary-bg: var(--color-secondary);
@@ -138,6 +139,8 @@ If you want to overwrite the default styling which are loaded from the js librar
 }
 ```
 
+Or have a look here: https://cookieconsent.orestbida.com/advanced/ui-customization.html
+
 ## Translations
 You can add your own translations or overwrite the existing ones by adding the following to your project look into the existing translations here [translations](./lang/en.yml)
 
@@ -148,6 +151,7 @@ VanillaCookieConsent\Categories:
   YoutubeDescription: 'This category includes cookies from Youtube.' # Description of the category with uppercase first letter
   Youtube_Cookie_cookie1: 'Youtube Cookie' # e.g. if you use the cookie Table - use the cookie name as key with uppercase first letter | underscore | "Cookie" | underscore | "CookieName" = cookie1 like its defined in your yml config
 ```
+For basic description and a cookie listing you can have look at the [Open Cookie Database](https://jkwakman.github.io/Open-Cookie-Database/open-cookie-database.html)
 
 ## Reporting Issues
 
@@ -156,8 +160,4 @@ features you're missing.
 
 ## Credits
 Cookie Consent from https://cookieconsent.orestbida.com/
-
-
-
-
-https://jkwakman.github.io/Open-Cookie-Database/open-cookie-database.html
+Cookie Descriptions from https://jkwakman.github.io/Open-Cookie-Database/open-cookie-database.html

@@ -1,7 +1,8 @@
-import * as cc from 'vanilla-cookieconsent';
+import * as CookieConsent from 'vanilla-cookieconsent';
 
 document.addEventListener('DOMContentLoaded', () => {
     const consentDialog = document.querySelector('#dialog__cookieconsent');
+    let removedCCDefaultDialog = false;
 
     let consentConfigData;
     if(consentDialog) consentConfigData = consentDialog.dataset.ccConfig;
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initPrefsButton();
     }
 
+    const cc = CookieConsent;
     setTimeout(() => {
         cc.run({
             autoShow: !consentDialog,
@@ -32,12 +34,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 ...consentConfig.categories
             },
-            language: consentConfig.language
+            language: consentConfig.language,
+            hideFromBots: true,
+            lazyHtmlGeneration: true,
         }).then(() => {
             // Show dialog if consent is not valid
             if (!cc.validConsent() && consentDialog) {
                 consentDialog.showModal();
                 consentDialog.focus();
+
+                // Remove default cc created
+                if(!removedCCDefaultDialog) {
+                    const ccDialog = document.querySelector('#cc-main .cm-wrapper');
+                    if(ccDialog) {
+                        ccDialog.remove();
+                        console.log('Default cookie consent dialog removed.');
+                        removedCCDefaultDialog = true;
+                    }
+                }
             }
         });
 

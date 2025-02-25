@@ -1,11 +1,15 @@
 import * as CookieConsent from 'vanilla-cookieconsent';
+import dialogPolyfill from 'dialog-polyfill'; // Fallback Polyfill
 
 document.addEventListener('DOMContentLoaded', () => {
     const consentDialog = document.querySelector('#dialog__cookieconsent');
     let removedCCDefaultDialog = false;
 
     let consentConfigData;
-    if(consentDialog) consentConfigData = consentDialog.dataset.ccConfig;
+    if(consentDialog) {
+        consentConfigData = consentDialog.dataset.ccConfig;
+        dialogPolyfill.registerDialog(consentConfigData);
+    }
     else consentConfigData = document.body.dataset.ccConfig;
 
     let consentConfig;

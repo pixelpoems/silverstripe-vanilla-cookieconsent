@@ -2,11 +2,20 @@
     <dialog id="dialog__cookieconsent" data-cc-config="$CCJSConfig">
         <div class="cookieconsent__content">
             <h2>
-                <%t VanillaCookieConsent\ConsentModal.Title 'We use cookies' %>
+                <% if $SiteConfig.ModalTitle %>
+                    $SiteConfig.ModalTitle
+                <% else %>
+                    <%t VanillaCookieConsent\ConsentModal.Title 'We use cookies' %>
+                <% end_if %>
+
             </h2>
 
             <p>
-                <%t VanillaCookieConsent\ConsentModal.Description 'We use cookies to give you the best possible experience.' %>
+                <% if $SiteConfig.ModalDescription %>
+                    $SiteConfig.ModalDescription
+                <% else %>
+                    <%t VanillaCookieConsent\ConsentModal.Description 'We use cookies to give you the best possible experience.' %>
+                <% end_if %>
             </p>
 
             <div class="cookieconsent__btns">
@@ -21,19 +30,9 @@
                 </button>
             </div>
         </div>
-
-        <div class="cookieconsent__footer">
-            <% if $SiteConfig.ImprintPage %>
-                <a href="$SiteConfig.ImprintPage.Link"><%t VanillaCookieConsent\Links.PrivacyPolicy 'PrivacyPolicy' %></a>
-            <% end_if %>
-
-            <% if $SiteConfig.DataProtectionPage %>
-                <a href="$SiteConfig.DataProtectionPage.Link"><%t VanillaCookieConsent\Links.Imprint 'Imprint' %></a>
-            <% end_if %>
-        </div>
     </dialog>
-    
+
     <button id="cookieconsent__settings-btn">
         <%t VanillaCookieConsent\ConsentModal.ShowConsent 'Cookie Settings' %>
-    </button>    
+    </button>
 <% end_if %>

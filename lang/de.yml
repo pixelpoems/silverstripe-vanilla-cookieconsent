@@ -7,7 +7,7 @@ de:
   VanillaCookieConsent\ConsentModal:
     ShowConsent: 'Cookie-Einstellungen'
     Title: 'Wir verwenden Cookies'
-    Description: 'Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung zu bieten.'#
+    Description: 'Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung zu bieten.'
   VanillaCookieConsent\PreferencesModal:
     Title: 'Cookie-Einstellungen verwalten'
     CloseIconLabel: 'Modal Schließen'

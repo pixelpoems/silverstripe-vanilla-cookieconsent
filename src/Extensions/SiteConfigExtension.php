@@ -14,13 +14,10 @@ use SilverStripe\ORM\DataExtension;
 class SiteConfigExtension extends DataExtension
 {
     private static array $db = [
+        'ModalTitle' => 'Varchar(255)',
+        'ModalDescription' => 'HTMLText',
         'TextBlockTitle' => 'Varchar(255)',
         'TextBlockDescription' => 'HTMLText'
-    ];
-
-    private static array $has_one = [
-        'DataProtectionPage' => Page::class,
-        'ImprintPage' => Page::class
     ];
 
     public function updateCMSFields(FieldList $fields)
@@ -29,12 +26,13 @@ class SiteConfigExtension extends DataExtension
 
         $fields->addFieldsToTab('Root.CookieConsent', [
             CompositeField::create(
-                TreeDropdownField::create('DataProtectionPageID', 'Datenschutzseite', Page::class),
-                TreeDropdownField::create('ImprintPageID', 'Impressumseite', Page::class)
-            )
-                ->setTitle('Cookie Consent Pages')
-                ->setDescription('Select the pages that contain your data protection and imprint information. They will be displayed on the custom Modal only'),
-           CompositeField::create(
+                TextField::create('ModalTitle', 'Modal Title')
+                    ->setDescription('Fallback: ' . _t('VanillaCookieConsent\ConsentModal.Title', 'We use cookies')),
+                HTMLEditorField::create('ModalDescription', 'Modal Description')
+                        ->setDescription('Fallback: ' . _t('VanillaCookieConsent\ConsentModal.Description', 'We use cookies to give you the best possible experience.'))
+                    ->setRows(5)
+            )->setTitle('Modal'),
+            CompositeField::create(
                TextField::create('TextBlockTitle', 'Text Block Title'),
                HTMLEditorField::create('TextBlockDescription', 'Text Block Description')
                 ->setRows(5)

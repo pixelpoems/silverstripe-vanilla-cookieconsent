@@ -58,10 +58,19 @@ class CCService extends Controller
 
     private function getLanguageData(): array
     {
+
+        // HTML SiteTree Links are not working in the modal description so we need to convert them to absolute links!!
+        if(SiteConfig::current_site_config()->ModalDescription) {
+            $modalDescription = DBHTMLText::create_field('HTMLText',  SiteConfig::current_site_config()->ModalDescription);
+            $modalDescription = $modalDescription?->AbsoluteLinks();
+        } else {
+            $modalDescription = _t('VanillaCookieConsent\ConsentModal.Description', 'We use cookies to provide you with the best experience on our website.');
+        }
+
         $data = [
             'consentModal' => [
-                'title' => _t('VanillaCookieConsent\ConsentModal.Title', 'We use cookies'),
-                'description' => _t('VanillaCookieConsent\ConsentModal.Description', 'We use cookies to provide you with the best experience on our website.'),
+                'title' => SiteConfig::current_site_config()->ModalTitle ?: _t('VanillaCookieConsent\ConsentModal.Title', 'We use cookies'),
+                'description' => $modalDescription,
                 'acceptAllBtn' => _t('VanillaCookieConsent\Buttons.AcceptAll', 'Accept all'),
                 'acceptNecessaryBtn' => _t('VanillaCookieConsent\Buttons.AcceptNecessary', 'Accept necessary'),
                 'showPreferencesBtn' => _t('VanillaCookieConsent\Buttons.ShowPreferences', 'Show preferences'),
@@ -78,6 +87,7 @@ class CCService extends Controller
 
         $categorySections = [];
 
+        // HTML SiteTree Links are not working in the modal description so we need to convert them to absolute links!!
         if(SiteConfig::current_site_config()->TextBlockTitle ||SiteConfig::current_site_config()->TextBlockDescription) {
             $descripiton = DBHTMLText::create_field('HTMLText',  SiteConfig::current_site_config()->TextBlockDescription);
 

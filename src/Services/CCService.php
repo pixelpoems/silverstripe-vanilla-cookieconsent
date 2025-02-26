@@ -28,8 +28,10 @@ class CCService extends Controller
             ]
         ];
 
-        foreach (self::config()->get('categories') as $category) {
-            $config['categories'][$category] = [];
+        if(self::config()->get('categories')) {
+            foreach (self::config()->get('categories') as $category) {
+                $config['categories'][$category] = [];
+            }
         }
 
         if (ModuleLoader::inst()->getManifest()->moduleExists('tractorcow/silverstripe-fluent') && self::config()->get('languages')) {
@@ -103,7 +105,8 @@ class CCService extends Controller
             'linkedCategory' => 'necessary'
         ];
 
-        foreach (self::config()->get('categories') as $category) {
+        if(self::config()->get('categories')) {
+            foreach (self::config()->get('categories') as $category) {
 
             $categoryKey = ucfirst(str_replace(' ', '', $category));
 
@@ -136,6 +139,7 @@ class CCService extends Controller
             }
 
             $categorySections[] = $categoryData;
+        }
         }
 
         $data['preferencesModal']['sections'] = array_values($categorySections);

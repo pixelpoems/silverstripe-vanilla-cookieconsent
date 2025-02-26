@@ -16,14 +16,10 @@ PageController:
 
 
 ---
-After:
-  -
 Only:
   moduleexists: 'tractorcow/silverstripe-fluent'
 ---
 SilverStripe\SiteConfig\SiteConfig:
-  extensions:
-    - 'TractorCow\Fluent\Extension\FluentExtension'
   translate:
     - 'ModalTitle'
     - 'ModalDescription'

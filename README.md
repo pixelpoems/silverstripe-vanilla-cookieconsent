@@ -160,6 +160,13 @@ VanillaCookieConsent\Categories:
 ```
 For basic description and a cookie listing you can have look at the [Open Cookie Database](https://jkwakman.github.io/Open-Cookie-Database/open-cookie-database.html)
 
+If you want to translate the texts in the modal and the first section in the preferences window you need to make sure that the Fluent Extension is added to the SiteConfig like this (the fields are already registered for translation in the module):
+```yml
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - 'TractorCow\Fluent\Extension\FluentExtension'
+```
+
 ## Reporting Issues
 
 Please [create an issue](https://github.com/pixelpoems/silverstripe-vanilla-cookieconsent/issues) for any bugs you've found, or

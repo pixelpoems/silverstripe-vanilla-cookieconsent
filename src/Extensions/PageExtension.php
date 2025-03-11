@@ -6,7 +6,7 @@ use SilverStripe\ErrorPage\ErrorPage;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\ORM\DataExtension;
-use SilverStripe\View\Requirements;
+use SilverStripe\SiteConfig\SiteConfig;
 use VanillaCookieConsent\Services\CCService;
 
 class PageExtension extends DataExtension
@@ -32,8 +32,10 @@ class PageExtension extends DataExtension
 
     public function getDisplayCookieConsent()
     {
+        if(!SiteConfig::current_site_config()->CCActive) return false;
+
         if($this->owner->HideCookieConsent) return false;
-        if(str_starts_with($this->owner->Link(), '/Security')) return false;
+        if(str_starts_with($this->owner->Link(), '/Security') && !SiteConfig::current_site_config()->DisplayOnLogin) return false;
         if($this->owner->ClassName === ErrorPage::class) return false;
 
         return true;

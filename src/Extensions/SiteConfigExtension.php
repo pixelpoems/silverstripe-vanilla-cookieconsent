@@ -4,6 +4,7 @@ namespace VanillaCookieConsent\Extensions;
 
 
 use Page;
+use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
@@ -14,6 +15,8 @@ use SilverStripe\ORM\DataExtension;
 class SiteConfigExtension extends DataExtension
 {
     private static array $db = [
+        'CCActive' => 'Boolean',
+        'DisplayOnLogin' => 'Boolean',
         'ModalTitle' => 'Varchar(255)',
         'ModalDescription' => 'HTMLText',
         'TextBlockTitle' => 'Varchar(255)',
@@ -25,6 +28,12 @@ class SiteConfigExtension extends DataExtension
         $fields->findOrMakeTab('Root.CookieConsent', 'Cookie Consent');
 
         $fields->addFieldsToTab('Root.CookieConsent', [
+            CompositeField::create(
+                CheckboxField::create('CCActive', 'Cookie Consent Active')
+                    ->setDescription('Enable or disable the cookie consent modal'),
+                CheckboxField::create('DisplayOnLogin', 'Display on Login Page')
+                    ->setDescription('Display the cookie consent modal on the login page')
+            )->setTitle('General Settings'),
             CompositeField::create(
                 TextField::create('ModalTitle', 'Modal Title')
                     ->setDescription('Fallback: ' . _t('VanillaCookieConsent\ConsentModal.Title', 'We use cookies')),

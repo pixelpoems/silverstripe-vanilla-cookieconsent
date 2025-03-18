@@ -50,7 +50,7 @@ If you not want to use the default js (for example if you want to use the script
 
 In your js file:
 ```js
-import { handleCookieConsentDialog } from '../../../../../vendor/pixelpoems/silverstripe-vanilla-cookieconsent/client/src/javascript/vanilla-cookie-consent-dialog.js';
+import { handleCookieConsentDialog } from '../../../../../vendor/pixelpoems/silverstripe-vanilla-cookieconsent/client/dist/javascript/vanilla-cookie-consent-dialog.min.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Your custom code

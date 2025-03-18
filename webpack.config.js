@@ -17,7 +17,9 @@ module.exports = {
             PATHS.SRC + '/javascript/vanilla-cookie-consent.js',
             PATHS.SRC + '/scss/vanilla-cookie-consent.scss'
         ],
-        // "inline-search": PATHS.SRC + '/javascript/inline-search.js'
+        "vanilla-cookie-consent-dialog": [
+            PATHS.SRC + '/javascript/vanilla-cookie-consent-dialog.js'
+        ]
     },
     output: {
         filename: 'javascript/[name].min.js',

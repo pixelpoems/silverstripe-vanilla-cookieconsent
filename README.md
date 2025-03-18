@@ -45,6 +45,29 @@ If you want to add an "Open Modal" button you can add this in your template:
 </button>
 ```
 
+### JavaScript Customization
+If you not want to use the default js (for example if you want to use the script in a different way or display it after you asked for the language or something else) you can disable the default js by adding the following to your project:
+
+In your js file:
+```js
+import { handleCookieConsentDialog } from '../../../../../vendor/pixelpoems/silverstripe-vanilla-cookieconsent/client/src/javascript/vanilla-cookie-consent-dialog.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Your custom code
+    
+    // Call the function to handle the cookie consent dialog
+    handleCookieConsentDialog();
+});
+```
+
+In your yml config:
+```yml
+VanillaCookieConsent\Services\CCService:
+  disable_default_css: true # Disables the default css
+  disable_default_js: true # Disables the default js
+```
+
+
 ### YML Configuration
 You can configure the cookies via the YML config. The following options are available:
 

@@ -2,6 +2,8 @@
 Name: pp-vanilla-cookieconsent--config
 ---
 VanillaCookieConsent\Services\CCService:
+#  disable_default_css: false # Disables the default css
+#  disable_default_js: false # Disables the default js
   default_lang: 'de' # Default language for the cookie consent modal
   # languages: # Only used if you want to use multiple languages in combination with fluent otherwise only default_lang is necessary
   #   - de

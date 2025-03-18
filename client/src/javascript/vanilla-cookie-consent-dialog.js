@@ -1,7 +1,7 @@
 import dialogPolyfill from "dialog-polyfill";
 import * as CookieConsent from "vanilla-cookieconsent";
 
-export default function handleCookieConsentDialog() {
+export function handleCookieConsentDialog() {
     const consentDialog = document.querySelector('#dialog__cookieconsent');
     let removedCCDefaultDialog = false;
 
@@ -124,3 +124,5 @@ export default function handleCookieConsentDialog() {
         })
     }
 }
+
+window.handleCookieConsentDialog = handleCookieConsentDialog;

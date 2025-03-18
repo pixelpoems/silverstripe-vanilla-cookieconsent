@@ -1,4 +1,4 @@
-import handleCookieConsentDialog from "./vanilla-cookie-consent-dialog";
+import { handleCookieConsentDialog } from "./vanilla-cookie-consent-dialog";
 
 document.addEventListener('DOMContentLoaded', () => {
     handleCookieConsentDialog();

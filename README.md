@@ -48,15 +48,22 @@ If you want to add an "Open Modal" button you can add this in your template:
 ### JavaScript Customization
 If you not want to use the default js (for example if you want to use the script in a different way or display it after you asked for the language or something else) you can disable the default js by adding the following to your project:
 
+Include the script in your template:
+```ss
+<% require javascript('pixelpoems/silverstripe-vanilla-cookieconsent:client/dist/javascript/vanilla-cookie-consent-dialog.min.js') %>
+```
+or your PageController:
+```php
+Requirements::javascript('pixelpoems/silverstripe-vanilla-cookieconsent:client/dist/javascript/vanilla-cookie-consent-dialog.min.js');
+```
+
 In your js file:
 ```js
-import { handleCookieConsentDialog } from '../../../../../vendor/pixelpoems/silverstripe-vanilla-cookieconsent/client/dist/javascript/vanilla-cookie-consent-dialog.min.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     // Your custom code
     
     // Call the function to handle the cookie consent dialog
-    handleCookieConsentDialog();
+    window.handleCookieConsentDialog();
 });
 ```
 

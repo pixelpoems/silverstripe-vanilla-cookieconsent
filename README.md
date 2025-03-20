@@ -81,9 +81,6 @@ You can configure the cookies via the YML config. The following options are avai
 ```yml
 VanillaCookieConsent\Services\CCService:
   default_lang: 'de' # Default language
-  languages: # Only used if you want to use multiple languages in combination with fluent otherwise only default_lang is necessary
-    - de
-    - en
   categories: # necessary category is added by default
     - analytics
     - marketing

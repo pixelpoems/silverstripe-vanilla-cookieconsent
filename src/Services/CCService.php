@@ -6,6 +6,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Core\Manifest\ModuleLoader;
+use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\ViewableData;
@@ -36,15 +37,16 @@ class CCService extends Controller
 
         if (ModuleLoader::inst()->getManifest()->moduleExists('tractorcow/silverstripe-fluent') && self::config()->get('languages')) {
 
-            foreach (self::config()->get('languages') as $language) {
-                $locale = Locale::get()->filter('Locale:StartsWith', $language)->first();
-                if(!$locale) continue;
+            $currentLocale = Locale::getCurrentLocale();
+            $langCode = substr($currentLocale->Locale, 0, 2);
+            $config['language']['default'] = $langCode;
+            i18n::set_locale($langCode);
 
-                $config['language']['translations'][$language] = FluentState::singleton()->withState(function ($state) use ($locale) {
-                    $state->setLocale($locale->Locale);
-                    return $this->getLanguageData();
-                });
-            }
+
+            $config['language']['translations'][$langCode] = FluentState::singleton()->withState(function ($state) use ($currentLocale) {
+                $state->setLocale($currentLocale->Locale);
+                return $this->getLanuageDagta();
+            });
 
         } else {
             // No fluent we use the default language

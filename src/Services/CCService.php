@@ -45,7 +45,7 @@ class CCService extends Controller
 
             $config['language']['translations'][$langCode] = FluentState::singleton()->withState(function ($state) use ($currentLocale) {
                 $state->setLocale($currentLocale->Locale);
-                return $this->getLanuageDagta();
+                return $this->getLanguageData();
             });
 
         } else {

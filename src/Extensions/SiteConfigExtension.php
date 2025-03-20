@@ -11,6 +11,7 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataExtension;
+use TractorCow\Fluent\Extension\FluentExtension;
 
 class SiteConfigExtension extends DataExtension
 {
@@ -48,6 +49,10 @@ class SiteConfigExtension extends DataExtension
            )->setTitle('Text Block')
             ->setDescription('This text block will be displayed in the preferences modal above the categories')
         ]);
+
+        if($this->owner->hasExtension(FluentExtension::class)) {
+            $this->owner->updateFluentLocalisedFields($fields);
+        }
 
         parent::updateCMSFields($fields);
     }

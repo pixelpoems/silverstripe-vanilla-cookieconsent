@@ -21,6 +21,8 @@ Only:
 ---
 SilverStripe\SiteConfig\SiteConfig:
   translate:
+    - 'CCActive'
+    - 'DisplayOnLogin'
     - 'ModalTitle'
     - 'ModalDescription'
     - 'TextBlockTitle'

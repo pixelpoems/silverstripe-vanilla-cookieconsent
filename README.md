@@ -89,6 +89,14 @@ VanillaCookieConsent\Services\CCService:
     _gat: '_gat_location.hostname'
 ```
 
+If you want to update or add the storage of a specific cookie in your cookie table, you have to do this via the lang yml files:
+```yml
+en:
+  VanillaCookieConsent\Categories:
+    Analytics_Cookie__ga_Storage: '2 Years'
+    Analytics_Cookie__gcl_au_Storage: '90 Days'
+```
+
 #### Example Configuration
 Here are some example for the config (The Base Translations for those are already included in the module):
 

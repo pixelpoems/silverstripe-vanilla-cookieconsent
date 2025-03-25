@@ -18,6 +18,7 @@ en:
     Cookie: 'Cookie'
     Domain: 'Domain'
     Description: 'Description'
+    Storage: 'Storage duration'
   VanillaCookieConsent\Categories:
     Necessary: 'Necessary'
     NecessaryDescription: 'Necessary cookies enable basic functions and are necessary for the website to function properly.'
@@ -25,9 +26,11 @@ en:
     Analytics: 'Analytics'
     AnalyticsDescription: 'Analytics cookies help us understand how users interact with our website.'
     Analytics_Cookie__ga: 'ID used to identify users'
+    Analytics_Cookie__ga_Storage: '2 Years'
     Analytics_Cookie__gat: 'Used to monitor number of Google Analytics server requests when using Google Tag Manager'
     Analytics_Cookie__gid: "ID used to identify users for 24 hours after last activity"
     Analytics_Cookie__gcl_au: "Used by Google AdSense for experimenting with advertisement efficiency across websites using their services."
+    Analytics_Cookie__gcl_au_Storage: '90 Days'
     Analytics_Cookie__gcl_aw: "Google uses cookies for advertising, including serving and rendering ads, personalizing ads (depending on your ad settings at g.co/adsettings), limiting the number of times an ad is shown to a user, muting ads you have chosen to stop seeing, and measuring the effectiveness of ads."
     Analytics_Cookie_td: "Registers statistical data on users' behaviour on the website. Used for internal analytics by the website operator."
     Analytics_Cookie_vuid: "This first party cookie created by Vimeo is used to assign a Vimeo Analytics unique id."

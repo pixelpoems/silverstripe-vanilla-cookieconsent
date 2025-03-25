@@ -125,7 +125,8 @@ class CCService extends Controller
                     $cookieTableData[] = [
                         'name' => $cookie,
                         'domain' => $domain,
-                        'desc' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie, '__ COOKIE DESCRIPTION (' . ucfirst($category) . '_Cookie' . $cookie . ')')
+                        'desc' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie, '__ COOKIE DESCRIPTION (' . ucfirst($category) . '_Cookie' . $cookie . ')'),
+                        'storage' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie . '_Storage', '__ COOKIE STORAGE (' . ucfirst($category) . '_Cookie' . $cookie . ')')
                     ];
                 }
 
@@ -135,6 +136,7 @@ class CCService extends Controller
                         'name' => _t('VanillaCookieConsent\CookieTable.Cookie', 'Cookie'),
                         'domain' => _t('VanillaCookieConsent\CookieTable.Domain', 'Domain'),
                         'desc' => _t('VanillaCookieConsent\CookieTable.Description', 'Description'),
+                        'storage' => _t('VanillaCookieConsent\CookieTable.Storage', 'Storage'),
                     ],
                     'body' => $cookieTableData
                 ];

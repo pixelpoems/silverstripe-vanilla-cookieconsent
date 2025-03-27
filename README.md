@@ -144,7 +144,16 @@ WIP
 
 ### DNA Design Element
 This Module comes with an Video Element for DNA Design. If you want to overwrite the template just copy the file from the module to your theme and adjust it to your needs (`templates > DNADesign > Elemental > Layout > VideoElement.ss`)
-Within this element a video can be added via youtube, viemo or a simple upload.
+Within this element a video can be added via youtube, vimeo, yumpu or a simple upload.
+
+You can edit the allowed embeddable services in the config:
+```yml
+Pixelpoems\VanillaCookieConsent\Elements\VideoElement:
+    allowed_video_embeds:
+      - youtube
+      - vimeo
+      - yumpu
+```
 
 ### Vanilla Usage
 If you want to use the iFrame solution without the DNA Design Element you can use the following code:

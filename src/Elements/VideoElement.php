@@ -25,9 +25,16 @@ class VideoElement extends BaseElement
 
     private static $inline_editable = false;
 
+    private static array $default_allowed_video_embeds = [
+        'youtube',
+        'vimeo',
+        'yumpu',
+    ];
+
     private static $db = [
         'EmbeddedVideoID' => 'Varchar',
         'SourceType' => 'Varchar',
+        'iFrameTitle' => 'Varchar',
     ];
 
     private static $has_one = [
@@ -50,22 +57,30 @@ class VideoElement extends BaseElement
         $fields->removeByName([
             'EmbeddedVideoID',
             'Video',
-            'SourceType'
+            'SourceType',
+            'iFrameTitle'
         ]);
 
+        $allowedVideoEmbeds = self::config()->get('allowed_video_embeds');
+        if(!count($allowedVideoEmbeds)) $allowedVideoEmbeds = self::$default_allowed_video_embeds;
+        $allowedVideoEmbedsList = [];
+        foreach ($allowedVideoEmbeds as $allowedVideoEmbed) {
+            $allowedVideoEmbedsList[$allowedVideoEmbed] = ucfirst($allowedVideoEmbed);
+        }
+        $allowedVideoEmbedsList['self-host'] = 'Self Hosted';
+
         $fields->addFieldsToTab('Root.Main', [
-            OptionsetField::create('SourceType', 'SourceType of Video', [
-                'youtube' => 'Youtube',
-                'vimeo' => 'Vimeo',
-                'self-host' => 'Self Hosted'
-            ])->setDescription('Please hit "Saved" or "Publish", for further settings')
+            OptionsetField::create('SourceType', 'SourceType of Video', $allowedVideoEmbedsList)
+                ->setDescription('Please hit "Saved" or "Publish", for further settings')
         ]);
 
         if ($this->isEmbedded()) {
-            $fields->addFieldToTab('Root.Main',
+            $fields->addFieldsToTab('Root.Main', [
                 TextField::create('EmbeddedVideoID', 'Embedded Video ID')
-                    ->setDescription( 'Code for embedded video')
-            );
+                    ->setDescription( 'Code for embedded video'),
+                TextField::create('iFrameTitle', 'iFrame Title')
+                    ->setDescription('Title for iFrame (optional - for accessibility)')
+            ]);
         }
 
         if ($this->isUpload()) {
@@ -82,11 +97,20 @@ class VideoElement extends BaseElement
 
     public function isEmbedded(): bool
     {
-        return $this->SourceType === 'youtube' || $this->SourceType === 'vimeo';
+        return $this->SourceType === 'youtube' || $this->SourceType === 'vimeo' || $this->SourceType === 'yumpu';
     }
 
     public function isUpload(): bool
     {
         return $this->SourceType === 'isUpload';
+    }
+
+
+    public function getBlockSchema()
+    {
+        $blockSchema = parent::getBlockSchema();
+
+        $blockSchema['content'] = $this->SourceType;
+        return $blockSchema;
     }
 }

@@ -49,3 +49,18 @@ en:
     Marketing_Cookie_LOGIN_INFO: "This cookie is used to play YouTube videos embedded on the website."
     Marketing_Cookie_Player: "This first party cookie created by Vimeo is used to remember user’s player mode preferences."
     Marketing_Cookie_continuous_play_v3: "Used to keep track of whether continuous play is on or not for a user"
+    ##
+    Video: 'Video'
+    VideoDescription: 'Video uses cookies to enable video playback, store user preferences, and analyze interaction with embedded content.'
+    Video_Cookie_VISITOR_INFO1_LIVE: 'Measures bandwidth and optimizes youtube video playback.'
+    Video_Cookie_VISITOR_INFO1_LIVE_Storage: '6 Months'
+    Video_Cookie_VISITOR_PRIVACY_METADATA: 'Stores user privacy preferences for embedded youtube videos.'
+    Video_Cookie_VISITOR_PRIVACY_METADATA_Storage: '90 Days'
+    Video_Cookie_YSC: 'Tracks interactions with embedded youtube videos.'
+    Video_Cookie_YSC_Storage: 'Session'
+    Video_Cookie___cf_bm: 'This cookie is set by Cloudflare to support Cloudflare Bot Management, helping to detect and mitigate automated traffic to protect the website from malicious bots. '
+    Video_Cookie___cf_bm_Storage: '30 minutes'
+    Video_Cookie__cfuvid: 'A session cookie used by Cloudflare for rate limiting purposes, ensuring that users interacting with Vimeo-hosted videos have a smooth and secure viewing experience.'
+    Video_Cookie__cfuvid_Storage: 'Session'
+    Video_Cookie_vuid: 'This cookie is set by Vimeo and is used to assign a unique Vimeo Analytics ID. It collects information about user interactions with Vimeo-hosted videos embedded on the website.'
+    Video_Cookie_vuid_Storage: '2 Years'

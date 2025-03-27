@@ -23,6 +23,7 @@ class CCService extends Controller
     {
         $config = [
             'categories' => [],
+            'enableIFrameManager' => self::config()->get('enable_iframe_manager'),
             'language' => [
                 'default' => self::config()->get('default_lang'),
                 'translations' => []
@@ -30,8 +31,8 @@ class CCService extends Controller
         ];
 
         if(self::config()->get('categories')) {
-            foreach (self::config()->get('categories') as $category) {
-                $config['categories'][$category] = [];
+            foreach (self::config()->get('categories') as $category => $services) {
+                $config['categories'][$category]['services'] = $services;
             }
         }
 
@@ -108,7 +109,7 @@ class CCService extends Controller
         ];
 
         if(self::config()->get('categories')) {
-            foreach (self::config()->get('categories') as $category) {
+            foreach (self::config()->get('categories') as $category => $services) {
 
             $categoryKey = ucfirst(str_replace(' ', '', $category));
 

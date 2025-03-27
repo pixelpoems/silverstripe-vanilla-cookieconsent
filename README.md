@@ -82,11 +82,20 @@ You can configure the cookies via the YML config. The following options are avai
 VanillaCookieConsent\Services\CCService:
   default_lang: 'de' # Default language
   categories: # necessary category is added by default
-    - analytics
-    - marketing
+    analytics: [] # no services
+    video: # services listed (e.g. youtube, vimeo)
+      - youtube
+      - vimeo
   analytics_cookie_table: # e.g. Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
-    _ga: '_ga_location.hostname'
-    _gat: '_gat_location.hostname'
+    _ga: 'your-location.com'
+    _gat: 'your-location.com'
+  video_cookie_table:
+    VISITOR_INFO1_LIVE: '.youtube.com'
+    VISITOR_PRIVACY_METADATA: '.youtube.com'
+    YSC: '.youtube.com'
+    __cf_bm: '.vimeo.com'
+    _cfuvid: '.vimeo.com'
+    vuid: '.vimeo.com'
 ```
 
 If you want to update or add the storage of a specific cookie in your cookie table, you have to do this via the lang yml files:
@@ -97,51 +106,55 @@ en:
     Analytics_Cookie__gcl_au_Storage: '90 Days'
 ```
 
-#### Example Configuration
-Here are some example for the config (The Base Translations for those are already included in the module):
+The Base Translations for those are already included in the module.
+If you want don't want to use the video category you can add the cookies to analytics or create a new category, but attention, then you need to add the translations for the new category and the cookies.
 
-##### YouTube
-```yml
-  categories: # necessary category is added by default
-    - marketing
-    - analytics
-  marketing_cookie_table:
-    VISITOR_INFO1_LIVE: 'youtube.com (3rd party)'
-    VISITOR_PRIVACY_METADATA: 'youtube.com (3rd party)'
-  analytics_cookie_table:
-    GPS: 'youtube.com (3rd party)'
-    YSC: 'youtube.com (3rd party)'
-    PREF: 'youtube.com (3rd party)'
-    DEVICE_INFO: 'youtube.com (3rd party)'
-    LOGIN_INFO: 'youtube.com (3rd party)'
-```
-
-##### Vimeo
-```yml
-  categories: # necessary category is added by default
-    - analytics
-  analytics_cookie_table:
-    vuid: 'vimeo.com'
-    sd_identity: 'vimeo.com'
-    sd_client_id: 'vimeo.com'
-    Player: 'vimeo.com'
-    continuous_play_v3: 'vimeo.com'
-```
-
-#### Google (reduced)
-```yml
-  categories: # necessary category is added by default
-    - analytics
-  analytics_cookie_table:
-    _ga: '' # Google Analytics
-    _gat: '' # Google Analytics
-    _gid: '' # Google Analytics
-    _gcl_au: '' # Google
-    _gcl_aw: '' # Google Ads
-```
 
 ## Script Management
-See the docs here: https://cookieconsent.orestbida.com/advanced/manage-scripts.html
+
+### Available script Attributes
+According to orestbida.com there are the following script attributes available:
+
+`data-category`: name of the category
+
+`data-service` (optional): if specified, a toggle will be generated in the preferencesModal
+
+`data-type` (optional): custom type (e.g. "module")
+
+`data-src` (optional): can be used instead of src to avoid validation issues
+
+Example usage:
+```html
+      <script
+      type="text/plain"
+      data-category="analytics"
+      data-service="Google Analytics"
+      >/*...code*/</script>
+```
+For further information have a look at the [Cookie Consent Documentation - Script Management](https://cookieconsent.orestbida.com/advanced/script-management.html)
+
+
+## iFrames
+This module comes with an iFrame solution for the video category. 
+
+### TinyMCE Fields
+WIP
+
+[//]: # (ToDo: WIP)
+
+### DNA Design Element
+This Module comes with an Video Element for DNA Design. If you want to overwrite the template just copy the file from the module to your theme and adjust it to your needs (`templates > DNADesign > Elemental > Layout > VideoElement.ss`)
+Within this element a video can be added via youtube, viemo or a simple upload.
+
+### Vanilla Usage
+If you want to use the iFrame solution without the DNA Design Element you can use the following code:
+```html
+<!-- Works for youtube and vimeo, just add the name of the service and the id -->
+ <div data-service="youtube|vimeo" data-id="add-your-id" data-autoscale></div>
+```
+
+For further information have a look at the [Cookie Consent Documentation - iFrameManager](https://cookieconsent.orestbida.com/advanced/iframemanager-setup.html)
+
 
 ## Custom Styling
 [//]: # (ToDo: Add custom styling instructions)
@@ -150,34 +163,34 @@ If you want to overwrite the default styling which are loaded from the js librar
 ```scss
 // Prefs Window
 #cc-main {
-	--cc-btn-border-radius: 0px;
-	--cc-btn-primary-bg: var(--color-primary);
-	--cc-btn-secondary-bg: var(--color-secondary);
-	font-family: var(--font-base);
+    --cc-btn-border-radius: 0px;
+    --cc-btn-primary-bg: var(--color-primary);
+    --cc-btn-secondary-bg: var(--color-secondary);
+    font-family: var(--font-base);
     
-	.pm--box{
-		border-radius: 0;
-	}
+    .pm--box{
+        border-radius: 0;
+    }
     
-	.pm__header{
-		.pm__title{
-			font-size: var(--fs-md);
-		}
-	}
+    .pm__header{
+        .pm__title{
+            font-size: var(--fs-md);
+        }
+    }
     
-	.pm__body{
-		.pm__section-title{
-			font-size: var(--fs-sm);
-		}
-	}
+    .pm__body{
+        .pm__section-title{
+            font-size: var(--fs-sm);
+        }
+    }
     
-	.pm__btn {
-		border: 0px;
-		padding: var(--btn-padding-y) var(--btn-padding-x);
-		font-size: var(--btn-font-size);
-	}
+    .pm__btn {
+        border: 0px;
+        padding: var(--btn-padding-y) var(--btn-padding-x);
+        font-size: var(--btn-font-size);
+    }
     
-	.pm__footer{}
+    .pm__footer{}
 }
 ```
 
@@ -210,3 +223,9 @@ features you're missing.
 ## Credits
 Cookie Consent from https://cookieconsent.orestbida.com/
 Cookie Descriptions from https://jkwakman.github.io/Open-Cookie-Database/open-cookie-database.html
+
+## ToDos
+- [ ] Add TinyMCE Field for iFrame
+- [ ] Check if Element does not course any issues without DNA Design Module installed
+- [ ] Add custom styling instructions
+- [ ] iFrame Manager without cookie consent dialog

@@ -1,5 +1,6 @@
 import dialogPolyfill from "dialog-polyfill";
 import * as CookieConsent from "vanilla-cookieconsent";
+require('@orestbida/iframemanager/src/iframemanager');
 
 export function handleCookieConsentDialog() {
     const consentDialog = document.querySelector('#dialog__cookieconsent');
@@ -25,17 +26,106 @@ export function handleCookieConsentDialog() {
         initPrefsButton();
     }
 
+    let categories = {
+        necessary: {
+            enabled: true,  // this category is enabled by default
+            readOnly: true  // this category cannot be disabled
+        },
+        ...consentConfig.categories
+    };
+
+    // const im = window.iframemanager();
+    if(consentConfig.enableIFrameManager &&  window.iframemanager()) {
+
+        // Initialize iframemanager
+        setTimeout(() => {
+            window.iframemanager().run({
+                onChange: ({ changedServices, eventSource }) => {
+                    if (eventSource.type === 'click') {
+                        // console.log('Changed services:', changedServices);
+                        for (const category in categories) {
+                            const servicesToAccept = [
+                                ...CookieConsent.getUserPreferences().acceptedServices[category],
+                                ...changedServices,
+                            ];
+
+                            CookieConsent.acceptService(servicesToAccept, category);
+                        }
+                    }
+                },
+                currLang: consentConfig.language.default,
+                services: {
+                    youtube: {
+                        embedUrl: 'https://www.youtube-nocookie.com/embed/{data-id}',
+                        thumbnailUrl: 'https://i3.ytimg.com/vi/{data-id}/hqdefault.jpg',
+                        iframe: {
+                            allow: 'accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen;',
+                        },
+                        languages: {
+                            de: {
+                                notice: 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://www.youtube.com/t/terms" target="_blank">terms and conditions</a> of youtube.com.',
+                                loadAllBtn: 'Accept and Load',
+                            },
+
+                        },
+                    },
+                    vimeo: {
+                        embedUrl: 'https://player.vimeo.com/video/{data-id}',
+                        iframe: {
+                            allow: 'fullscreen; picture-in-picture;',
+                        },
+
+                        thumbnailUrl: async (dataId, setThumbnail) => {
+                            const url = `https://vimeo.com/api/v2/video/${dataId}.json`;
+                            const response = await (await fetch(url)).json();
+                            const thumbnailUrl = response[0]?.thumbnail_large;
+                            thumbnailUrl && setThumbnail(thumbnailUrl);
+                        },
+
+                        languages: {
+                            de: {
+                                notice: 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://vimeo.com/terms" target="_blank">terms and conditions</a> of vimeo.com.',
+                                loadBtn: 'Load once',
+                                loadAllBtn: "Don't ask again",
+                            },
+                        },
+                    }
+                }
+            });
+        }, 500);
+
+
+        // Setup for cc to accept/reject iframemanager services
+        for (const category in categories) {
+            if (category === 'video') {
+
+                let services = categories[category].services;
+                categories[category].services = {};
+                services.forEach(service => {
+                    const label = service.charAt(0).toUpperCase() + service.slice(1);
+                    categories[category].services[service] = {
+                        label: label,
+                        onAccept: () => {
+                            // console.log('Accepting service:', service);
+                            window.iframemanager().acceptService(service)
+                        },
+                        onReject: () => {
+                            // console.log('Rejecting service:', service);
+                            window.iframemanager().rejectService(service)
+                        },
+                    }
+                });
+                break;
+            }
+        }
+    }
+
+
     const cc = CookieConsent;
     setTimeout(() => {
         cc.run({
             autoShow: !consentDialog,
-            categories: {
-                necessary: {
-                    enabled: true,  // this category is enabled by default
-                    readOnly: true  // this category cannot be disabled
-                },
-                ...consentConfig.categories
-            },
+            categories: categories,
             language: consentConfig.language,
             hideFromBots: true,
             lazyHtmlGeneration: true,

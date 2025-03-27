@@ -30,18 +30,6 @@ class PageExtension extends DataExtension
         ]);
     }
 
-    public function getDisplayCookieConsent()
-    {
-        if(!SiteConfig::current_site_config()->CCActive) return false;
-
-        if($this->owner->HideCookieConsent) return false;
-        if(str_starts_with($this->owner->Link(), '/Security') && !SiteConfig::current_site_config()->DisplayOnLogin) return false;
-        if($this->owner->ClassName === ErrorPage::class) return false;
-
-        return true;
-
-    }
-
     public function getCCJSConfig()
     {
         $service = CCService::create();

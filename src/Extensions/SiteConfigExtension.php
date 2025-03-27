@@ -5,6 +5,7 @@ namespace VanillaCookieConsent\Extensions;
 
 use Page;
 use PageController;
+use SilverStripe\Control\Controller;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
@@ -12,6 +13,7 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\Security\Security;
 use TractorCow\Fluent\Extension\FluentExtension;
 
 class SiteConfigExtension extends DataExtension
@@ -62,10 +64,16 @@ class SiteConfigExtension extends DataExtension
     {
         if(!$this->owner->CCActive) return false;
 
-        $currentPage = PageController::curr()->data();
-        if($currentPage->HideCookieConsent) return false;
-        if(str_starts_with($currentPage->Link(), '/Security') && !$this->owner->DisplayOnLogin) return false;
-        if($currentPage->ClassName === ErrorPage::class) return false;
+        $controller = Controller::curr();
+        if($controller instanceof PageController) {
+            $currentPage = $controller->data();
+            if($currentPage->HideCookieConsent) return false;
+            if($currentPage->ClassName === ErrorPage::class) return false;
+        }
+
+        if($controller instanceof Security && !$this->owner->DisplayOnLogin) {
+            return false;
+        }
 
         return true;
 

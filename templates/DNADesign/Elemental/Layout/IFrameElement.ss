@@ -4,7 +4,7 @@
     <% end_if %>
 
     <% if $isEmbedded %>
-        <div data-service="$SourceType" data-id="$EmbeddedVideoID" <% if $iFrameTitle %>data-title="$iFrameTitle"<% end_if %> data-autoscale></div>
+        <div data-service="$SourceType" data-id="$EmbeddedID" <% if $iFrameTitle %>data-title="$iFrameTitle"<% end_if %> data-autoscale></div>
     <% end_if %>
 
     <% if $isUpload %>

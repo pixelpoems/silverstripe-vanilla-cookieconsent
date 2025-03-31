@@ -9,30 +9,30 @@ use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 
-class VideoElement extends BaseElement
+class IFrameElement extends BaseElement
 {
-    private static $singular_name = 'VideoElement';
+    private static $singular_name = 'IFrame Element';
 
-    private static $plural_name = 'VideoElements';
+    private static $plural_name = 'IFrame Elements';
 
-    private static $description = 'Shows embedded or self hosted videos';
+    private static $description = 'Shows embedded iframes or self hosted videos';
 
-    private static $table_name = 'VideoElement';
+    private static $table_name = 'Pixelpoems_IFrameElement';
 
     private static $icon = 'font-icon-block-media';
 
-    private static $controller_template = 'VideoElement';
+    private static $controller_template = 'IFrameElement';
 
     private static $inline_editable = false;
 
-    private static array $default_allowed_video_embeds = [
+    private static array $default_allowed_embeds = [
         'youtube',
         'vimeo',
         'yumpu',
     ];
 
     private static $db = [
-        'EmbeddedVideoID' => 'Varchar',
+        'EmbeddedID' => 'Varchar',
         'SourceType' => 'Varchar',
         'iFrameTitle' => 'Varchar',
     ];
@@ -47,7 +47,7 @@ class VideoElement extends BaseElement
 
     public function getType(): string
     {
-        return 'Video Element';
+        return 'IFrame Element';
     }
 
     public function getCMSFields()
@@ -55,29 +55,29 @@ class VideoElement extends BaseElement
         $fields = parent::getCMSFields();
 
         $fields->removeByName([
-            'EmbeddedVideoID',
+            'EmbeddedID',
             'Video',
             'SourceType',
             'iFrameTitle'
         ]);
 
-        $allowedVideoEmbeds = self::config()->get('allowed_video_embeds');
-        if(!count($allowedVideoEmbeds)) $allowedVideoEmbeds = self::$default_allowed_video_embeds;
-        $allowedVideoEmbedsList = [];
-        foreach ($allowedVideoEmbeds as $allowedVideoEmbed) {
-            $allowedVideoEmbedsList[$allowedVideoEmbed] = ucfirst($allowedVideoEmbed);
+        $allowedEmbeds = self::config()->get('allowed_embeds');
+        if(!$allowedEmbeds) $allowedEmbeds = self::$default_allowed_embeds;
+        $allowedEmbedsList = [];
+        foreach ($allowedEmbeds as $allowedEmbed) {
+            $allowedEmbedsList[$allowedEmbed] = ucfirst($allowedEmbed);
         }
-        $allowedVideoEmbedsList['self-host'] = 'Self Hosted';
+        $allowedEmbedsList['self-host'] = 'Self Hosted';
 
         $fields->addFieldsToTab('Root.Main', [
-            OptionsetField::create('SourceType', 'SourceType of Video', $allowedVideoEmbedsList)
+            OptionsetField::create('SourceType', 'SourceType of Video', $allowedEmbedsList)
                 ->setDescription('Please hit "Saved" or "Publish", for further settings')
         ]);
 
         if ($this->isEmbedded()) {
             $fields->addFieldsToTab('Root.Main', [
-                TextField::create('EmbeddedVideoID', 'Embedded Video ID')
-                    ->setDescription( 'Code for embedded video'),
+                TextField::create('EmbeddedID', 'Embedded ID')
+                    ->setDescription( 'Code for embedded (e.g. YouTube ID, Vimeo ID, Yumpu ID)'),
                 TextField::create('iFrameTitle', 'iFrame Title')
                     ->setDescription('Title for iFrame (optional - for accessibility)')
             ]);

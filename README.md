@@ -81,11 +81,16 @@ You can configure the cookies via the YML config. The following options are avai
 ```yml
 VanillaCookieConsent\Services\CCService:
   default_lang: 'de' # Default language
+  # IF you want to configure services:
   categories: # necessary category is added by default
     analytics: [] # no services
     video: # services listed (e.g. youtube, vimeo)
       - youtube
       - vimeo
+#  # IF you NOT want to configure services:
+#  categories: # necessary category is added by default
+#    - analytics
+#    - video
   analytics_cookie_table: # e.g. Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
     _ga: 'your-location.com'
     _gat: 'your-location.com'

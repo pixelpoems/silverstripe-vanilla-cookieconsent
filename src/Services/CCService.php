@@ -108,8 +108,14 @@ class CCService extends Controller
             'linkedCategory' => 'necessary'
         ];
 
-        if(self::config()->get('categories')) {
-            foreach (self::config()->get('categories') as $category => $services) {
+        if($categories = self::config()->get('categories')) {
+
+            if (array_is_list($categories)) {
+                // Convert list-style array into an associative array with empty arrays as values
+                $categories = array_fill_keys($categories, []);
+            }
+
+            foreach ($categories as $category => $services) {
 
             $categoryKey = ucfirst(str_replace(' ', '', $category));
 

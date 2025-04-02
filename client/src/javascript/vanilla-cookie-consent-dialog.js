@@ -34,7 +34,6 @@ export function handleCookieConsentDialog() {
         ...consentConfig.categories
     };
 
-    // const im = window.iframemanager();
     if(consentConfig.enableIFrameManager &&  window.iframemanager()) {
 
         // Initialize iframemanager
@@ -131,7 +130,6 @@ export function handleCookieConsentDialog() {
         }
     }
 
-
     const cc = CookieConsent;
     setTimeout(() => {
         cc.run({
@@ -182,7 +180,6 @@ export function handleCookieConsentDialog() {
                 const acceptValue = JSON.parse(button.dataset.ccAccept);
                 cc.acceptCategory(acceptValue);
                 consentDialog.close();
-                // console.log(acceptValue);
             });
         }
     }

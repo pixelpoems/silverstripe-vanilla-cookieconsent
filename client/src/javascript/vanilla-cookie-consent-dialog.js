@@ -104,11 +104,9 @@ export function handleCookieConsentDialog() {
             });
         }, 500);
 
-
         // Setup for cc to accept/reject iframemanager services
         for (const category in categories) {
             if (category === 'video') {
-
                 let services = categories[category].services;
                 categories[category].services = {};
                 services.forEach(service => {

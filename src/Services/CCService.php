@@ -38,7 +38,7 @@ class CCService extends Controller
 
             foreach ($categories as $category => $services) {
                 if($services) $config['categories'][$category]['services'] = $services;
-                else $config['categories'][] = $category;
+                else $config['categories'][$category] = [];
             }
         }
 

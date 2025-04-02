@@ -30,8 +30,13 @@ class CCService extends Controller
             ]
         ];
 
-        if(self::config()->get('categories')) {
-            foreach (self::config()->get('categories') as $category => $services) {
+        if($categories = self::config()->get('categories')) {
+            if (array_is_list($categories)) {
+                // Convert list-style array into an associative array with empty arrays as values
+                $categories = array_fill_keys($categories, []);
+            }
+
+            foreach ($categories as $category => $services) {
                 $config['categories'][$category]['services'] = $services;
             }
         }
@@ -117,44 +122,43 @@ class CCService extends Controller
 
             foreach ($categories as $category => $services) {
 
-            $categoryKey = ucfirst(str_replace(' ', '', $category));
+                $categoryKey = ucfirst(str_replace(' ', '', $category));
 
-            $categoryData = [
-                'title' => _t('VanillaCookieConsent\Categories.' . $categoryKey, $category),
-                'description' => _t('VanillaCookieConsent\Categories.' . $categoryKey . 'Description', '__ CATEGORY DESCRIPTION'),
-                'linkedCategory' => $category
-            ];
+                $categoryData = [
+                    'title' => _t('VanillaCookieConsent\Categories.' . $categoryKey, 'VanillaCookieConsent\Categories.' . $categoryKey),
+                    'description' => _t('VanillaCookieConsent\Categories.' . $categoryKey . 'Description', 'VanillaCookieConsent\Categories.' . $categoryKey . 'Description'),
+                    'linkedCategory' => $category
+                ];
 
-            if($cookies = self::config()->get($category . '_cookie_table')) {
+                if($cookies = self::config()->get($category . '_cookie_table')) {
 
-                $cookieTableData = [];
-                foreach ($cookies as $cookie => $domain) {
-                    $cookieTableData[] = [
-                        'name' => $cookie,
-                        'domain' => $domain,
-                        'desc' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie, '__ COOKIE DESCRIPTION (' . ucfirst($category) . '_Cookie' . $cookie . ')'),
-                        'storage' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie . '_Storage', '__ COOKIE STORAGE (' . ucfirst($category) . '_Cookie' . $cookie . ')')
+                    $cookieTableData = [];
+                    foreach ($cookies as $cookie => $domain) {
+                        $cookieTableData[] = [
+                            'name' => $cookie,
+                            'domain' => $domain,
+                            'desc' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie, 'VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie),
+                            'storage' => _t('VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie . '_Storage', 'VanillaCookieConsent\Categories.' . $categoryKey . '_Cookie_' . $cookie . '_Storage')
+                        ];
+                    }
+
+                    $categoryData['cookieTable'] = [
+                        //                    'caption' => 'Cookie Table',
+                        'headers' => [
+                            'name' => _t('VanillaCookieConsent\CookieTable.Cookie', 'Cookie'),
+                            'domain' => _t('VanillaCookieConsent\CookieTable.Domain', 'Domain'),
+                            'desc' => _t('VanillaCookieConsent\CookieTable.Description', 'Description'),
+                            'storage' => _t('VanillaCookieConsent\CookieTable.Storage', 'Storage'),
+                        ],
+                        'body' => $cookieTableData
                     ];
                 }
 
-                $categoryData['cookieTable'] = [
-//                    'caption' => 'Cookie Table',
-                    'headers' => [
-                        'name' => _t('VanillaCookieConsent\CookieTable.Cookie', 'Cookie'),
-                        'domain' => _t('VanillaCookieConsent\CookieTable.Domain', 'Domain'),
-                        'desc' => _t('VanillaCookieConsent\CookieTable.Description', 'Description'),
-                        'storage' => _t('VanillaCookieConsent\CookieTable.Storage', 'Storage'),
-                    ],
-                    'body' => $cookieTableData
-                ];
+                $categorySections[] = $categoryData;
             }
-
-            $categorySections[] = $categoryData;
-        }
         }
 
         $data['preferencesModal']['sections'] = array_values($categorySections);
         return $data;
     }
-
 }

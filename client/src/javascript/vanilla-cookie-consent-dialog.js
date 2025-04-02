@@ -34,7 +34,14 @@ export function handleCookieConsentDialog() {
         ...consentConfig.categories
     };
 
+    for (const category in categories) {
+        if (categories[category].services === undefined) {
+            categories[category].services = {};
+        }
+    }
+
     if(consentConfig.enableIFrameManager &&  window.iframemanager()) {
+        console.log('IFrameManager enabled.');
 
         // Initialize iframemanager
         setTimeout(() => {

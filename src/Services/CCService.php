@@ -39,6 +39,12 @@ class CCService extends Controller
             foreach ($categories as $category => $services) {
                 if($services) $config['categories'][$category]['services'] = $services;
                 else $config['categories'][$category] = [];
+
+                if($services) {
+                    foreach ($services as $service) {
+                        $config['services'][] = $service;
+                    }
+                } else $config['services'] = null;
             }
         }
 
@@ -94,7 +100,17 @@ class CCService extends Controller
                 'closeIconLabel' => _t('VanillaCookieConsent\PreferencesModal.CloseIconLabel', 'Close'),
                 'sections' => []
             ],
+            'iframeManager' => [
+                'loadBtn' => _t('VanillaCookieConsent\IframeManager.LoadBtn', 'Load Once'),
+                'loadAllBtn' => _t('VanillaCookieConsent\IframeManager.LoadAllBtn', 'Don\'t ask again'),
+                'notices' => []
+                // YouTube => 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://www.youtube.com/t/terms" target="_blank">terms and conditions</a> of youtube.com.',
+                // Vimeo => 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://vimeo.com/terms" target="_blank">terms and conditions</a> of vimeo.com.'
+                // Yumpu => 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://www.yumpu.com/en/info/privacy_policy" target="_blank">privacy policy</a> of yumpu.com.'
+            ]
         ];
+
+
 
         $categorySections = [];
 
@@ -156,6 +172,12 @@ class CCService extends Controller
                 }
 
                 $categorySections[] = $categoryData;
+
+                if($services) {
+                    foreach ($services as $service) {
+                        $data['iframeManager']['notices'][$service] = _t('VanillaCookieConsent\IframeManager.Notice_' . $service, 'This content is hosted by a third party. By showing the external content you accept the terms and conditions of ' . strtolower($service) . '.');
+                    }
+                }
             }
         }
 

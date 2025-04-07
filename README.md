@@ -142,6 +142,12 @@ For further information have a look at the [Cookie Consent Documentation - Scrip
 ## iFrames
 This module comes with an iFrame solution for the video category. 
 
+If you want to use the iFrame solution you need to add the following to your yml config:
+```yml
+VanillaCookieConsent\Services\CCService:
+  enable_iframe_manager: true
+```
+
 ### TinyMCE Fields
 WIP
 

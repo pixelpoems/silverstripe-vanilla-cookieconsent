@@ -14,6 +14,12 @@ en:
   VanillaCookieConsent\Links:
     PrivacyPolicy: 'Privacy Policy'
     Imprint: 'Imprint'
+  VanillaCookieConsent\IframeManager:
+    LoadBtn: 'Load Once'
+    LoadAllBtn: "Don't ask again"
+    Notice_youtube: 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://www.youtube.com/t/terms" target="_blank">terms and conditions</a> of youtube.com.'
+    Notice_vimeo: 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://vimeo.com/terms" target="_blank">terms and conditions</a> of vimeo.com.'
+    Notice_yumpu: 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://www.yumpu.com/en/info/privacy_policy" target="_blank">privacy policy</a> of yumpu.com.'
   VanillaCookieConsent\CookieTable:
     Cookie: 'Cookie'
     Domain: 'Domain'

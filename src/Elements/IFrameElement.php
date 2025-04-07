@@ -92,6 +92,8 @@ class IFrameElement extends BaseElement
             );
         }
 
+        $fields->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

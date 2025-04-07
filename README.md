@@ -148,6 +148,9 @@ VanillaCookieConsent\Services\CCService:
   enable_iframe_manager: true
 ```
 
+If you add an embed in your TinyMCE for the DBHTMLTexts you there is an Extension witch preps the iframe for the usage of the iframemanager script. In your template just call:
+``$HTML.Embeded`` - this will update the html so that the iframemanager can do the rest automatically. 
+
 ### TinyMCE Fields
 WIP
 

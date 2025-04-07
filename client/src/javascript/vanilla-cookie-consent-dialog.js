@@ -47,7 +47,9 @@ export function handleCookieConsentDialog() {
         let iframemanagerConfigServices = {};
         let iframeLangStrings = consentConfig.language.translations[consentConfig.language.default].iframeManager;
 
-        for (const service of consentConfig.services) {
+        // If no services but manager is enabled - we add all
+        let services = consentConfig.services ?? ['youtube', 'vimeo', 'yump'];
+        for (const service of services) {
             switch (service) {
                 case 'youtube':
                     iframemanagerConfigServices.youtube = {
@@ -148,40 +150,42 @@ export function handleCookieConsentDialog() {
         }
     }
 
-    const cc = CookieConsent;
-    setTimeout(() => {
-        cc.run({
-            autoShow: !consentDialog,
-            categories: categories,
-            language: consentConfig.language,
-            hideFromBots: true,
-            lazyHtmlGeneration: true,
-        }).then(() => {
-            // Show dialog if consent is not valid
-            if (!cc.validConsent() && consentDialog) {
-                document.onkeyup = function (e) {
-                    if (e.key === 'Escape') {
-                        // We need to show the dialog again if it was closed
-                        consentDialog.showModal();
-                    }
-                };
+    if(consentConfig.enableConsentModal) {
+        const cc = CookieConsent;
+        setTimeout(() => {
+            cc.run({
+                autoShow: !consentDialog,
+                categories: categories,
+                language: consentConfig.language,
+                hideFromBots: true,
+                lazyHtmlGeneration: true,
+            }).then(() => {
+                // Show dialog if consent is not valid
+                if (!cc.validConsent() && consentDialog) {
+                    document.onkeyup = function (e) {
+                        if (e.key === 'Escape') {
+                            // We need to show the dialog again if it was closed
+                            consentDialog.showModal();
+                        }
+                    };
 
-                consentDialog.showModal();
-                consentDialog.focus();
+                    consentDialog.showModal();
+                    consentDialog.focus();
 
-                // Remove default cc created
-                if (!removedCCDefaultDialog) {
-                    const ccDialog = document.querySelector('#cc-main .cm-wrapper');
-                    if (ccDialog) {
-                        ccDialog.remove();
-                        // console.log('Default cookie consent dialog removed.');
-                        removedCCDefaultDialog = true;
+                    // Remove default cc created
+                    if (!removedCCDefaultDialog) {
+                        const ccDialog = document.querySelector('#cc-main .cm-wrapper');
+                        if (ccDialog) {
+                            ccDialog.remove();
+                            // console.log('Default cookie consent dialog removed.');
+                            removedCCDefaultDialog = true;
+                        }
                     }
                 }
-            }
-        });
+            });
 
-    }, 500);
+        }, 500);
+    }
 
     function initAcceptButtons() {
         const acceptBtns = consentDialog.querySelectorAll('[data-cc-accept]');

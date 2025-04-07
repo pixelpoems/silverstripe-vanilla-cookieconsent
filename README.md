@@ -148,13 +148,9 @@ VanillaCookieConsent\Services\CCService:
   enable_iframe_manager: true
 ```
 
-If you add an embed in your TinyMCE for the DBHTMLTexts you there is an Extension witch preps the iframe for the usage of the iframemanager script. In your template just call:
-``$HTML.Embeded`` - this will update the html so that the iframemanager can do the rest automatically. 
-
 ### TinyMCE Fields
-WIP
-
-[//]: # (ToDo: WIP)
+If you add an embed in your TinyMCE for the DBHTMLTexts you there is an Extension witch preps the iframe for the usage of the iframemanager script. In your template just call:
+``$HTML.Embeded`` - this will update the html so that the iframemanager can do the rest automatically.
 
 ### DNA Design Element
 This Module comes with an Video Element for DNA Design. If you want to overwrite the template just copy the file from the module to your theme and adjust it to your needs (`templates > DNADesign > Elemental > Layout > VideoElement.ss`)
@@ -175,6 +171,14 @@ If you want to use the iFrame solution without the DNA Design Element you can us
 <!-- Works for youtube and vimeo, just add the name of the service and the id -->
  <div data-service="youtube|vimeo" data-id="add-your-id" data-autoscale></div>
 ```
+
+### Only IFrameManager (without Cookie Consent Modal)
+If you want to use the IFrame without the cookie Consent you can disable the modal like this in your yml:
+```yml
+VanillaCookieConsent\Services\CCService:
+  enable_consent_modal: false
+```
+! Attention: Make sure that the `default_lang` and the languages are stil defined so that the info strings are displayed in the correct language. Furthermore if no categories or services defined - all of the possibilities are added to the iframe manager if this is enabled.
 
 For further information have a look at the [Cookie Consent Documentation - iFrameManager](https://cookieconsent.orestbida.com/advanced/iframemanager-setup.html)
 

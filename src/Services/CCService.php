@@ -103,15 +103,10 @@ class CCService extends Controller
             'iframeManager' => [
                 'loadBtn' => _t('VanillaCookieConsent\IframeManager.LoadBtn', 'Load Once'),
                 'loadAllBtn' => _t('VanillaCookieConsent\IframeManager.LoadAllBtn', 'Don\'t ask again'),
-                'notices' => []
-                // YouTube => 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://www.youtube.com/t/terms" target="_blank">terms and conditions</a> of youtube.com.',
-                // Vimeo => 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://vimeo.com/terms" target="_blank">terms and conditions</a> of vimeo.com.'
-                // Yumpu => 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://www.yumpu.com/en/info/privacy_policy" target="_blank">privacy policy</a> of yumpu.com.'
+                'notices' => [] // Content will be loaded l173-177
             ]
         ];
-
-
-
+        
         $categorySections = [];
 
         // HTML SiteTree Links are not working in the modal description so we need to convert them to absolute links!!

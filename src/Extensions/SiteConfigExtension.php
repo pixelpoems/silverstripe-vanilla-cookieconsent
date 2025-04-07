@@ -10,11 +10,13 @@ use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Security\Security;
 use TractorCow\Fluent\Extension\FluentExtension;
+use VanillaCookieConsent\Services\CCService;
 
 class SiteConfigExtension extends DataExtension
 {
@@ -31,7 +33,17 @@ class SiteConfigExtension extends DataExtension
     {
         $fields->findOrMakeTab('Root.CookieConsent', 'Cookie Consent');
 
+        $ymlconfig_modalinfo = '<p class="message good">Cookie Consent Modal is availible (YML ACTIVE)</p>';
+        $isModalEnabled = CCService::config()->get('enable_consent_modal');
+        if(!$isModalEnabled) $ymlconfig_modalinfo = '<p class="message bad">Cookie Consent Modal is not availibe (YML INACTIVE)</p>';
+
+        $ymlconfig_iframeinfo = '<p class="message good">IFrame Manager is availible (YML ACTIVE)</p>';
+        $isIFrameEnabled = CCService::config()->get('enable_iframe_manager');
+        if(!$isIFrameEnabled) $ymlconfig_iframeinfo = '<p class="message bad">IFrame Manager is not availibe (YML INACTIVE)</p>';
+
         $fields->addFieldsToTab('Root.CookieConsent', [
+            LiteralField::create('YMLModalConfigInfo', $ymlconfig_modalinfo),
+            LiteralField::create('YMLIFrameConfigInfo', $ymlconfig_iframeinfo),
             CompositeField::create(
                 CheckboxField::create('CCActive', 'Cookie Consent Active')
                     ->setDescription('Enable or disable the cookie consent modal'),

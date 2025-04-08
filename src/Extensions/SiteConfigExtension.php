@@ -6,6 +6,7 @@ namespace VanillaCookieConsent\Extensions;
 use Page;
 use PageController;
 use SilverStripe\Control\Controller;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
@@ -13,12 +14,11 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TreeDropdownField;
-use SilverStripe\ORM\DataExtension;
 use SilverStripe\Security\Security;
 use TractorCow\Fluent\Extension\FluentExtension;
 use VanillaCookieConsent\Services\CCService;
 
-class SiteConfigExtension extends DataExtension
+class SiteConfigExtension extends Extension
 {
     private static array $db = [
         'CCActive' => 'Boolean',
@@ -68,8 +68,6 @@ class SiteConfigExtension extends DataExtension
         if($this->owner->hasExtension(FluentExtension::class)) {
             $this->owner->updateFluentLocalisedFields($fields);
         }
-
-        parent::updateCMSFields($fields);
     }
 
     public function getDisplayCookieConsent()

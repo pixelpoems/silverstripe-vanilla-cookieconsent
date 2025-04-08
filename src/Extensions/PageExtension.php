@@ -2,14 +2,14 @@
 
 namespace VanillaCookieConsent\Extensions;
 
+use SilverStripe\Core\Extension;
 use SilverStripe\ErrorPage\ErrorPage;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\Tab;
-use SilverStripe\ORM\DataExtension;
 use SilverStripe\SiteConfig\SiteConfig;
 use VanillaCookieConsent\Services\CCService;
 
-class PageExtension extends DataExtension
+class PageExtension extends Extension
 {
     private static array $db = [
         'HideCookieConsent' => 'Boolean'

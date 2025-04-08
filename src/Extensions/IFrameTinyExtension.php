@@ -3,13 +3,13 @@
 namespace VanillaCookieConsent\Extensions;
 
 
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Parsers\ShortcodeParser;
 use VanillaCookieConsent\Services\CCService;
 
 
-class IFrameTinyExtension extends DataExtension
+class IFrameTinyExtension extends Extension
 {
 
     public function Embeded()

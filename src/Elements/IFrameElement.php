@@ -9,6 +9,10 @@ use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 
+if (!class_exists(BaseElement::class)) {
+    return;
+}
+
 class IFrameElement extends BaseElement
 {
     private static $singular_name = 'IFrame Element';

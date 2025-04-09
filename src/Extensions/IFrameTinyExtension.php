@@ -37,6 +37,9 @@ class IFrameTinyExtension extends Extension
             } elseif (preg_match('#yumpu\.com/en/embed/view/([^\?&"/]+)#', $src, $m)) {
                 $service = 'yump';
                 $id = $m[1];
+            } elseif (preg_match('#google\.com/maps/embed\?pb=([^\?&"/]+)#', $src, $m)) {
+                $service = 'googlemaps';
+                $id = $m[1];
             }
 
             // Try to grab title if available

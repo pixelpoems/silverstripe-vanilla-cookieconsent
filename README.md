@@ -91,6 +91,12 @@ VanillaCookieConsent\Services\CCService:
 #  categories: # necessary category is added by default
 #    - analytics
 #    - video
+  # If you want to configure which iframe services are allowed
+  iframe_services:
+    - googlemaps
+    - youtube
+    - vimeo
+    - yumpu
   analytics_cookie_table: # e.g. Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
     _ga: 'your-location.com'
     _gat: 'your-location.com'

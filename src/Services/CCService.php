@@ -19,6 +19,13 @@ class CCService extends Controller
     use Injectable;
     use Configurable;
 
+    private static array $iframe_services = [
+        'googlemaps',
+        'youtube',
+        'vimeo',
+        'yumpu',
+    ];
+
     public function CCJSConfig(): string
     {
         $config = [
@@ -174,13 +181,12 @@ class CCService extends Controller
                     }
 
                     $categorySections[] = $categoryData;
-
-                    if($services) {
-                        foreach ($services as $service) {
-                            $data['iframeManager']['notices'][$service] = _t('VanillaCookieConsent\IframeManager.Notice_' . $service, 'This content is hosted by a third party. By showing the external content you accept the terms and conditions of ' . strtolower($service) . '.');
-                        }
-                    }
                 }
+            }
+
+
+            foreach (self::config()->get('iframe_services') as $service) {
+                $data['iframeManager']['notices'][$service] = _t('VanillaCookieConsent\IframeManager.Notice_' . $service, 'This content is hosted by a third party. By showing the external content you accept the terms and conditions of ' . strtolower($service) . '.');
             }
 
             $data['preferencesModal']['sections'] = array_values($categorySections);

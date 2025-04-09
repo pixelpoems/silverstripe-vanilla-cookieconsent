@@ -5,9 +5,11 @@ namespace Pixelpoems\VanillaCookieConsent\Elements;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
+use VanillaCookieConsent\Services\CCService;
 
 if (!class_exists(BaseElement::class)) {
     return;
@@ -28,12 +30,6 @@ class IFrameElement extends BaseElement
     private static $controller_template = 'IFrameElement';
 
     private static $inline_editable = false;
-
-    private static array $default_allowed_embeds = [
-        'youtube',
-        'vimeo',
-        'yumpu',
-    ];
 
     private static $db = [
         'EmbeddedID' => 'Varchar',
@@ -66,10 +62,25 @@ class IFrameElement extends BaseElement
         ]);
 
         $allowedEmbeds = self::config()->get('allowed_embeds');
-        if(!$allowedEmbeds) $allowedEmbeds = self::$default_allowed_embeds;
+        if(!$allowedEmbeds) $allowedEmbeds = CCService::config()->get('iframe_services');
         $allowedEmbedsList = [];
         foreach ($allowedEmbeds as $allowedEmbed) {
-            $allowedEmbedsList[$allowedEmbed] = ucfirst($allowedEmbed);
+            switch ($allowedEmbed) {
+                case 'googlemaps':
+                    $allowedEmbedsList[$allowedEmbed] = 'Google Maps';
+                    break;
+                case 'youtube':
+                    $allowedEmbedsList[$allowedEmbed] = 'YouTube';
+                    break;
+                case 'vimeo':
+                    $allowedEmbedsList[$allowedEmbed] = 'Vimeo';
+                    break;
+                case 'yumpu':
+                    $allowedEmbedsList[$allowedEmbed] = 'Yumpu';
+                    break;
+                default:
+                    $allowedEmbedsList[$allowedEmbed] = ucfirst($allowedEmbed);
+            }
         }
         $allowedEmbedsList['self-host'] = 'Self Hosted';
 
@@ -79,7 +90,25 @@ class IFrameElement extends BaseElement
         ]);
 
         if ($this->isEmbedded()) {
+
+            $embeddedInfo = '';
+            switch ($this->SourceType) {
+                case 'googlemaps':
+                    $embeddedInfo = 'The Google Maps ID is the part after the "https://www.google.com/maps/embed?pb=" in the URL';
+                    break;
+                case 'youtube':
+                    $embeddedInfo = 'The YouTube ID is the part after the "https://www.youtube.com/embed/" in the URL';
+                    break;
+                case 'vimeo':
+                    $embeddedInfo = 'The Vimeo ID is the part after the "https://player.vimeo.com/video/" in the URL';
+                    break;
+                case 'yumpu':
+                    $embeddedInfo = 'The Yumpu ID is the part after the "https://www.yumpu.com/en/embed/view/" in the URL';
+                    break;
+            }
+
             $fields->addFieldsToTab('Root.Main', [
+                LiteralField::create('EmbeddedIDInfo', '<p class="message">' . $embeddedInfo . '</p>'),
                 TextField::create('EmbeddedID', 'Embedded ID')
                     ->setDescription( 'Code for embedded (e.g. YouTube ID, Vimeo ID, Yumpu ID)'),
                 TextField::create('iFrameTitle', 'iFrame Title')
@@ -103,12 +132,13 @@ class IFrameElement extends BaseElement
 
     public function isEmbedded(): bool
     {
-        return $this->SourceType === 'youtube' || $this->SourceType === 'vimeo' || $this->SourceType === 'yumpu';
+        return $this->SourceType === 'youtube' || $this->SourceType === 'vimeo' || $this->SourceType === 'yumpu'
+            || $this->SourceType === 'googlemaps';
     }
 
     public function isUpload(): bool
     {
-        return $this->SourceType === 'isUpload';
+        return $this->SourceType === 'self-host';
     }
 
 

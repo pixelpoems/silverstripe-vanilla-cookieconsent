@@ -2,6 +2,8 @@ import dialogPolyfill from "dialog-polyfill";
 import * as CookieConsent from "vanilla-cookieconsent";
 require('@orestbida/iframemanager/src/iframemanager');
 
+let cc = null;
+
 export function handleCookieConsentDialog() {
     const consentDialog = document.querySelector('#dialog__cookieconsent');
     let removedCCDefaultDialog = false;
@@ -20,7 +22,9 @@ export function handleCookieConsentDialog() {
         return;
     }
 
-    if (consentDialog) {
+    console.log(consentConfig.enableConsentModal)
+    if (consentDialog && consentConfig.enableConsentModal) {
+        console.log('Consent dialog enabled');
         initShowButton();
         initAcceptButtons();
         initPrefsButton();
@@ -41,16 +45,30 @@ export function handleCookieConsentDialog() {
     }
 
     if(consentConfig.enableIFrameManager &&  window.iframemanager()) {
-        console.log('IFrameManager enabled.');
-
         // Add iframemanager services to config
         let iframemanagerConfigServices = {};
         let iframeLangStrings = consentConfig.language.translations[consentConfig.language.default].iframeManager;
 
         // If no services but manager is enabled - we add all
-        let services = consentConfig.services ?? ['youtube', 'vimeo', 'yump'];
+        let services = consentConfig.services ?? ['youtube', 'vimeo', 'yump', 'googlemaps'];
         for (const service of services) {
             switch (service) {
+                case 'googlemaps':
+                    iframemanagerConfigServices.googlemaps = {
+                        embedUrl: 'https://www.google.com/maps/embed?pb={data-id}',
+                        //thumbnailUrl: 'https://maps.googleapis.com/maps/api/staticmap?size=600x300&markers={data-id}&key={api-key}',
+                        iframe: {
+                            allow: 'fullscreen; picture-in-picture;',
+                        },
+                        languages: {} // Needed to add language support
+                    }
+
+                    iframemanagerConfigServices.googlemaps.languages[consentConfig.language.default] = {
+                        notice: iframeLangStrings.notices.googlemaps,
+                        loadBtn: iframeLangStrings.loadBtn,
+                        loadAllBtn: iframeLangStrings.loadAllBtn
+                    }
+                    break;
                 case 'youtube':
                     iframemanagerConfigServices.youtube = {
                         embedUrl: 'https://www.youtube-nocookie.com/embed/{data-id}',
@@ -151,7 +169,8 @@ export function handleCookieConsentDialog() {
     }
 
     if(consentConfig.enableConsentModal) {
-        const cc = CookieConsent;
+        console.log('Consent dialog enabled');
+        cc = CookieConsent;
         setTimeout(() => {
             cc.run({
                 autoShow: !consentDialog,

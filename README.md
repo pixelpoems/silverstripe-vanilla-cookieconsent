@@ -184,7 +184,10 @@ If you want to use the IFrame without the cookie Consent you can disable the mod
 VanillaCookieConsent\Services\CCService:
   enable_consent_modal: false
 ```
-! Attention: Make sure that the `default_lang` and the languages are stil defined so that the info strings are displayed in the correct language. Furthermore if no categories or services defined - all of the possibilities are added to the iframe manager if this is enabled.
+! Attention: Make sure that the `default_lang` and the languages are stil defined so that the info strings are displayed in the correct language. Furthermore if no categories or services defined - all of the possibilities are added to the iframe manager if this is enabled. Furthermore make sure you add the CCConfig to your body.
+```html
+<body data-cc-config="$CCJSConfig">
+```
 
 For further information have a look at the [Cookie Consent Documentation - iFrameManager](https://cookieconsent.orestbida.com/advanced/iframemanager-setup.html)
 

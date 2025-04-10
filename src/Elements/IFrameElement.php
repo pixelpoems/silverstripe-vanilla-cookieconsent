@@ -61,8 +61,7 @@ class IFrameElement extends BaseElement
             'iFrameTitle'
         ]);
 
-        $allowedEmbeds = self::config()->get('allowed_embeds');
-        if(!$allowedEmbeds) $allowedEmbeds = CCService::config()->get('iframe_services');
+        $allowedEmbeds = CCService::config()->get('iframe_services');
         $allowedEmbedsList = [];
         foreach ($allowedEmbeds as $allowedEmbed) {
             switch ($allowedEmbed) {

@@ -181,6 +181,7 @@ If you want to use the iFrame solution without the DNA Design Element you can us
 ### Only IFrameManager (without Cookie Consent Modal)
 If you want to use the IFrame without the cookie Consent you can disable the modal like this in your yml:
 ```yml
+# For this its important to load after the module config 'pp-vanilla-cookieconsent--config'
 VanillaCookieConsent\Services\CCService:
   enable_consent_modal: false
 ```

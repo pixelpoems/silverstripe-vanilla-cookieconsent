@@ -130,10 +130,14 @@ export function handleCookieConsentDialog() {
                         // console.log('Changed services:', changedServices);
                         for (const category in categories) {
                             if(category) {
-                                const servicesToAccept = [
-                                    ...CookieConsent.getUserPreferences().acceptedServices[category],
-                                    ...changedServices,
-                                ];
+
+                                let servicesToAccept = [];
+                                if(consentConfig.enableConsentModal) {
+                                    servicesToAccept = [
+                                        ...CookieConsent.getUserPreferences().acceptedServices[category],
+                                        ...changedServices,
+                                    ];
+                                } else servicesToAccept = [...changedServices];
 
                                 CookieConsent.acceptService(servicesToAccept, category);
                             }

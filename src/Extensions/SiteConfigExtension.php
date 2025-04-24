@@ -41,10 +41,14 @@ class SiteConfigExtension extends Extension
         $isIFrameEnabled = CCService::config()->get('enable_iframe_manager');
         if(!$isIFrameEnabled) $ymlconfig_iframeinfo = '<p class="message bad">IFrame Manager is not active (YML INACTIVE)</p>';
 
+
+        $fields->addFieldsToTab('Root.CookieConsent', [
+            LiteralField::create('YMLModalConfigInfo', $ymlconfig_modalinfo),
+            LiteralField::create('YMLIFrameConfigInfo', $ymlconfig_iframeinfo)
+        ]);
+
         if($isModalEnabled) {
             $fields->addFieldsToTab('Root.CookieConsent', [
-                LiteralField::create('YMLModalConfigInfo', $ymlconfig_modalinfo),
-                LiteralField::create('YMLIFrameConfigInfo', $ymlconfig_iframeinfo),
                 CompositeField::create(
                     CheckboxField::create('CCActive', 'Cookie Consent Active')
                         ->setDescription('Enable or disable the cookie consent modal'),

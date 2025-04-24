@@ -1,4 +1,4 @@
-<% if $SiteConfig.DisplayCookieConsent %>
+<% if $SiteConfig.shouldIncludeDialog %>
     <dialog id="dialog__cookieconsent" data-cc-config="$CCJSConfig">
         <div class="cookieconsent__content">
             <h2>

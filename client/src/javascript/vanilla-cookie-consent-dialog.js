@@ -22,9 +22,9 @@ export function handleCookieConsentDialog() {
         return;
     }
 
-    console.log(consentConfig.enableConsentModal)
+    // console.log(consentConfig.enableConsentModal)
     if (consentDialog && consentConfig.enableConsentModal) {
-        console.log('Consent dialog enabled');
+        // console.log('Consent dialog enabled');
         initShowButton();
         initAcceptButtons();
         initPrefsButton();
@@ -169,7 +169,7 @@ export function handleCookieConsentDialog() {
     }
 
     if(consentConfig.enableConsentModal) {
-        console.log('Consent dialog enabled');
+        // console.log('Consent dialog enabled');
         cc = CookieConsent;
         setTimeout(() => {
             cc.run({

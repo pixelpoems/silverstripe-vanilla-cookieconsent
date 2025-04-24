@@ -14,7 +14,7 @@ class PageControllerExtension extends Extension
 
     public function onBeforeInit()
     {
-        if (SiteConfig::current_site_config()->getDisplayCookieConsent()) {
+        if (SiteConfig::current_site_config()->shouldIncludeConfig()) {
             if(!CCService::config()->get('disable_default_css')) {
                 Requirements::css('pixelpoems/silverstripe-vanilla-cookieconsent:client/dist/css/vanilla-cookie-consent.min.css');
             }

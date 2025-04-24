@@ -129,12 +129,14 @@ export function handleCookieConsentDialog() {
                     if (eventSource.type === 'click') {
                         // console.log('Changed services:', changedServices);
                         for (const category in categories) {
-                            const servicesToAccept = [
-                                ...CookieConsent.getUserPreferences().acceptedServices[category],
-                                ...changedServices,
-                            ];
+                            if(category) {
+                                const servicesToAccept = [
+                                    ...CookieConsent.getUserPreferences().acceptedServices[category],
+                                    ...changedServices,
+                                ];
 
-                            CookieConsent.acceptService(servicesToAccept, category);
+                                CookieConsent.acceptService(servicesToAccept, category);
+                            }
                         }
                     }
                 },

@@ -267,7 +267,4 @@ Cookie Consent from https://cookieconsent.orestbida.com/
 Cookie Descriptions from https://jkwakman.github.io/Open-Cookie-Database/open-cookie-database.html
 
 ## ToDos
-- [ ] Add TinyMCE Field for iFrame
-- [ ] Check if Element does not course any issues without DNA Design Module installed
 - [ ] Add custom styling instructions
-- [ ] iFrame Manager without cookie consent dialog

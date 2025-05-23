@@ -5,7 +5,6 @@ namespace VanillaCookieConsent\Extensions;
 
 use SilverStripe\Core\Extension;
 use SilverStripe\ORM\FieldType\DBHTMLText;
-use SilverStripe\View\Parsers\ShortcodeParser;
 use VanillaCookieConsent\Services\CCService;
 
 
@@ -15,7 +14,7 @@ class IFrameTinyExtension extends Extension
     public function Embeded()
     {
         // Suppress XML encoding for DBHtmlText
-        $forTemplate = $this->owner;
+        $forTemplate = $this->getOwner();
 
         if (!CCService::config()->get('enable_iframe_manager')) {
             return $forTemplate->RAW();

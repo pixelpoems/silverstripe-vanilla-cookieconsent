@@ -164,11 +164,11 @@ Within this element a video can be added via youtube, vimeo, yumpu or a simple u
 
 You can edit the allowed embeddable services in the config:
 ```yml
-Pixelpoems\VanillaCookieConsent\Elements\IFrameElement:
-    allowed_embeds:
-      - youtube
-      - vimeo
-      - yumpu
+VanillaCookieConsent\Services\CCService:
+  iframe_services:
+    - youtube
+    - vimeo
+    - yumpu
 ```
 
 ### Vanilla Usage

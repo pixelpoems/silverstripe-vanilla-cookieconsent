@@ -171,6 +171,27 @@ VanillaCookieConsent\Services\CCService:
     - yumpu
 ```
 
+Also add a video category to your consent categories so the consent can handle the services:
+```yml
+VanillaCookieConsent\Services\CCService:
+  video: # Category for video services
+    - youtube # make sure its written lite the services above
+    - vimeo
+```
+
+So your full config for the iframe looks like this:
+```yml
+VanillaCookieConsent\Services\CCService:
+  enable_iframe_manager: true
+  iframe_services:
+    - youtube
+    - vimeo
+  categories: # necessary category is added by default
+    video: # Category for video services
+      - youtube
+      - vimeo
+```
+
 ### Vanilla Usage
 If you want to use the iFrame solution without the DNA Design Element you can use the following code:
 ```html

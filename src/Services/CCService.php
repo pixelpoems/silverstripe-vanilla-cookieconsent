@@ -9,8 +9,6 @@ use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\View\ViewableData;
-use SilverStripe\View\ViewableData_Customised;
 use TractorCow\Fluent\Model\Locale;
 use TractorCow\Fluent\State\FluentState;
 
@@ -199,7 +197,7 @@ class CCService extends Controller
         }
 
         foreach ($this->getIFrameServices() as $service) {
-            $data['iframeManager']['notices'][$service] = _t('VanillaCookieConsent\IframeManager.Notice_' . $service, 'This content is hosted by a third party. By showing the external content you accept the terms and conditions of ' . strtolower($service) . '.');
+            $data['iframeManager']['notices'][$service] = _t('VanillaCookieConsent\IframeManager.Notice_' . $service, 'This content is hosted by a third party. By showing the external content you accept the terms and conditions of ' . strtolower((string) $service) . '.');
         }
 
         return $data;

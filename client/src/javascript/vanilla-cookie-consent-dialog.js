@@ -154,7 +154,9 @@ export function handleCookieConsentDialog() {
         for (const category in categories) {
             let services = categories[category].services;
             categories[category].services = {};
-            services.forEach(service => {
+
+            if(services.length === undefined) continue;
+            for (const service of services) {
                 const label = service.charAt(0).toUpperCase() + service.slice(1);
                 categories[category].services[service] = {
                     label: label,
@@ -167,8 +169,7 @@ export function handleCookieConsentDialog() {
                         window.iframemanager().rejectService(service)
                     },
                 }
-            });
-            break;
+            }
         }
     }
 

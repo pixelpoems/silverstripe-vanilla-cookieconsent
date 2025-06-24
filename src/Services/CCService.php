@@ -63,7 +63,7 @@ class CCService extends Controller
                     foreach ($services as $service) {
                         $config['services'][] = $service;
                     }
-                } else $config['services'] = null;
+                }
             }
         }
 
@@ -135,7 +135,7 @@ class CCService extends Controller
             $categorySections = [];
 
             // HTML SiteTree Links are not working in the modal description so we need to convert them to absolute links!!
-            if(SiteConfig::current_site_config()->TextBlockTitle ||SiteConfig::current_site_config()->TextBlockDescription) {
+            if(SiteConfig::current_site_config()->TextBlockTitle || SiteConfig::current_site_config()->TextBlockDescription) {
                 $descripiton = DBHTMLText::create_field('HTMLText',  SiteConfig::current_site_config()->TextBlockDescription);
 
                 $categorySections[] = [

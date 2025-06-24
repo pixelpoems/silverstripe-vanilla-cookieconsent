@@ -61,7 +61,7 @@ class CCService extends Controller
                     foreach ($services as $service) {
                         $config['services'][] = $service;
                     }
-                } else $config['services'] = null;
+                }
             }
         }
 

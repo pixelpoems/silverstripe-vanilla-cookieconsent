@@ -144,13 +144,9 @@ class CCService extends Controller
                 ];
             }
 
-            $categorySections[] = [
-                'title' => _t('VanillaCookieConsent\Categories.Necessary', 'Necessary'),
-                'description' => _t('VanillaCookieConsent\Categories.NecessaryDescription', 'These cookies are necessary for the website to function.'),
-                'linkedCategory' => 'necessary'
-            ];
-
-            if($categories = self::config()->get('categories')) {
+            $categories = self::config()->get('categories') ?: [];
+            $categories = array_merge(['necessary'], $categories);
+            if($categories) {
 
                 if (array_is_list($categories)) {
                     // Convert list-style array into an associative array with empty arrays as values

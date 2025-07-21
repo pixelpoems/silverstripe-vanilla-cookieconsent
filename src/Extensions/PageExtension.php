@@ -17,6 +17,11 @@ class PageExtension extends Extension
         'HideCookieConsent' => false
     ];
 
+    public function updateCMSFields($fields)
+    {
+        $fields->removeByName('HideCookieConsent');
+    }
+
     public function updateSettingsFields($fields)
     {
         $fields->addFieldsToTab('Root.Settings', [

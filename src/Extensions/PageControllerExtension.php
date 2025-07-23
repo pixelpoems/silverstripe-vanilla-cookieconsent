@@ -20,7 +20,9 @@ class PageControllerExtension extends Extension
             }
 
             if(!CCService::config()->get('disable_default_js')) {
-                Requirements::javascript('pixelpoems/silverstripe-vanilla-cookieconsent:client/dist/javascript/vanilla-cookie-consent.min.js');
+                Requirements::javascript('pixelpoems/silverstripe-vanilla-cookieconsent:client/dist/javascript/vanilla-cookie-consent.min.js', [
+                    'defer' => true,
+                ]);
             }
         }
     }

@@ -12,3 +12,12 @@ VanillaCookieConsent\Services\CCService:
   # analytics_cookie_table: # Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
   #   _ga: '_ga_location.hostname'
   #   _gat: '_gat_location.hostname'
+
+
+---
+Name: pp-vanilla-cookieconsent--routes
+After: framework/_config/routes#coreroutes
+---
+SilverStripe\Control\Director:
+  rules:
+    'insights//$Action': 'VanillaCookieConsent\Services\InsightController'

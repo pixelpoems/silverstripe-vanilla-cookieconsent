@@ -43,6 +43,7 @@ class CCService extends Controller
             'categories' => [],
             'enableIFrameManager' => self::config()->get('enable_iframe_manager'),
             'enableConsentModal' => self::config()->get('enable_consent_modal'),
+            'enableInsights' => SiteConfig::current_site_config()->SavePeriodForInsights > 0,
             'language' => [
                 'default' => self::config()->get('default_lang'),
                 'translations' => []

@@ -22,9 +22,7 @@ export function handleCookieConsentDialog() {
         return;
     }
 
-    // console.log(consentConfig.enableConsentModal)
     if (consentDialog && consentConfig.enableConsentModal) {
-        // console.log('Consent dialog enabled');
         initShowButton();
         initAcceptButtons();
         initPrefsButton();
@@ -140,6 +138,7 @@ export function handleCookieConsentDialog() {
                                 } else servicesToAccept = [...changedServices];
 
                                 CookieConsent.acceptService(servicesToAccept, category);
+                                // ToDo: send insight for accepted services
                             }
                         }
                     }
@@ -162,11 +161,11 @@ export function handleCookieConsentDialog() {
                     label: label,
                     onAccept: () => {
                         // console.log('Accepting service:', service);
-                        window.iframemanager().acceptService(service)
+                        window.iframemanager().acceptService(service);
                     },
                     onReject: () => {
                         // console.log('Rejecting service:', service);
-                        window.iframemanager().rejectService(service)
+                        window.iframemanager().rejectService(service);
                     },
                 }
             }
@@ -174,7 +173,6 @@ export function handleCookieConsentDialog() {
     }
 
     if(consentConfig.enableConsentModal) {
-        // console.log('Consent dialog enabled');
         cc = CookieConsent;
         setTimeout(() => {
             cc.run({
@@ -209,8 +207,44 @@ export function handleCookieConsentDialog() {
             });
 
         }, 500);
+
+        window.addEventListener('cc:onFirstConsent', ({detail}) => {
+            let acceptedCategoriesString = detail.cookie.categories.join(',');
+
+
+            // Check the categories accepted
+            // If only nessary category is accepted
+            if (detail.cookie.categories.necessary && Object.keys(detail.cookie.categories).length === 1 || acceptedCategoriesString === 'necessary') {
+                // Only necessary category is accepted
+                sendInsightCreate('Rejected', 'necessary');
+                return;
+            }
+
+            // If all categories are accepted
+            if (Object.keys(detail.cookie.categories).length === Object.keys(categories).length) {
+                // All categories are accepted
+                sendInsightCreate('Accepted', 'all');
+                return;
+            }
+
+            // If not all categories are accepted and not only necessary
+            // Check if specific categories are accepted
+            // We filter out the 'necessary' category as it is always accepted
+            // and we want to know if any other categories are accepted
+            // If no specific categories are accepted, we consider it as rejected
+            const acceptedCategories = Object.keys(detail.cookie.categories).filter(cat => cat !== 'necessary' && detail.cookie.categories[cat]);
+            if (acceptedCategories.length > 0) {
+                // Specific categories are accepted
+                sendInsightCreate('Partly', acceptedCategoriesString);
+                return;
+            }
+
+
+            // do something
+        });
     }
 
+    // This initializes the accept buttons in the consent dialog
     function initAcceptButtons() {
         const acceptBtns = consentDialog.querySelectorAll('[data-cc-accept]');
 
@@ -225,6 +259,22 @@ export function handleCookieConsentDialog() {
                  */
                 const acceptValue = JSON.parse(button.dataset.ccAccept);
                 cc.acceptCategory(acceptValue);
+                //
+                // switch (acceptValue) {
+                //     case 'necessary':
+                //         // Accept only necessary category
+                //         sendInsightCreate('Rejected', acceptValue);
+                //         break;
+                //     case 'all':
+                //         // Accept all categories
+                //         sendInsightCreate('Accepted', acceptValue);
+                //         break;
+                //     default:
+                //         // Accept only specific categories
+                //         sendInsightCreate('Partly', acceptValue);
+                //         break;
+                // }
+
                 consentDialog.close();
             });
         }
@@ -240,6 +290,7 @@ export function handleCookieConsentDialog() {
         })
     }
 
+    // This initializes the open preferences button in the dialog including handle the close button
     function initPrefsButton() {
         const prefsBtn = document.querySelector('[data-cc="show-preferencesModal"]');
 
@@ -267,6 +318,38 @@ export function handleCookieConsentDialog() {
             })
         })
     }
+
+    function sendInsightCreate(consentType, acceptedCategories) {
+        if(!consentConfig.enableInsights) return;
+
+        const insightData = {
+            consentType,
+            acceptedCategories
+        }
+
+        const insightUrl = location.protocol + '//' + location.hostname + '/insights/save';
+        fetch(insightUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(insightData),
+        })
+        .then(response => {
+            // Check if response is 201
+            // if (response.status === 201) {
+            //     console.log('Insight created successfully');
+            // } else {
+            //     console.error('Failed to create insight:', response.statusText);
+            // }
+        }).catch(error => {
+            // console.error('Error creating insight:', error);
+        })
+
+    }
 }
 
 window.handleCookieConsentDialog = handleCookieConsentDialog;
+
+
+

@@ -86,8 +86,10 @@ class SiteConfigExtension extends Extension
                     TemplateHolderField::create('VisiualInsights', 'Insights', 'VanillaCookieConsent/ConsentInsights'),
                     GridField::create(
                         'Insights',
-                        'Insights',
-                        Insight::get(),
+                        'Insights (Last ' . $this->owner->SavePeriodForInsights . ' days)',
+                        Insight::get()->filter([
+                            'Created:GreaterThanOrEqual' => date('Y-m-d H:i:s', strtotime("-{$this->owner->SavePeriodForInsights} days"))
+                        ])->sort('Created DESC'),
                         GridFieldConfig_RecordViewer::create()
                     )
                 ]);
@@ -136,7 +138,10 @@ class SiteConfigExtension extends Extension
 
     public function getCCInsightData()
     {
-        $insights = Insight::get();
+        $insights = Insight::get()->filter([
+            'Created:GreaterThanOrEqual' => date('Y-m-d H:i:s', strtotime("-{$this->owner->SavePeriodForInsights} days"))
+        ])->sort('Created DESC');
+
         $categories = CCService::config()->get('categories');
 
         $categoriesForTemplate = [];

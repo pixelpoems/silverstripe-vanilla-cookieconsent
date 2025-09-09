@@ -17,6 +17,7 @@ export function handleCookieConsentDialog() {
     let consentConfig;
     if (consentConfigData) {
         consentConfig = JSON.parse(consentConfigData);
+        // console.log(consentConfig);
     } else {
         console.error('No valid config for cookie consent given.');
         return;
@@ -326,6 +327,15 @@ export function handleCookieConsentDialog() {
             consentType,
             acceptedCategories
         }
+
+        if(consentConfig.language?.locale) {
+            insightData.locale = consentConfig.language.locale;
+        }
+
+        if(consentConfig?.subsite?.id) {
+            insightData.subsiteId = consentConfig.subsite.id;
+        }
+
 
         const insightUrl = location.protocol + '//' + location.hostname + '/insights/save';
         fetch(insightUrl, {

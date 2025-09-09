@@ -1,5 +1,5 @@
-<% with $SiteConfig.CCInsightData %>
-    <h2 style="margin-top: 2rem">Cookie Consent Insights</h2>
+<% with $SiteConfig.CCInsightDataForCurrentLocale %>
+    <h2 style="margin-top: 2rem">Cookie Consent Insights for Locale $Locale</h2>
     <p>
         The displayed data is based on the last <strong>$SavePeriodForInsights days</strong> of cookie consent data.<br>
         Currently we have data for <strong>$Consents.Total</strong> consents.
@@ -11,7 +11,7 @@
             <span>Last $SavePeriodForInsights days</span>
             <div>
                 <canvas
-                    id="acceptRejectRateChart"
+                    id="acceptRejectRateChart--locale"
                     data-accepted="$Consents.Accepted"
                     data-partly="$Consents.Partly"
                     data-rejected="$Consents.Rejected"
@@ -24,7 +24,7 @@
             <span>Last $SavePeriodForInsights days</span>
             <div>
                 <canvas
-                    id="acceptRejectByCategoryChart"
+                    id="acceptRejectByCategoryChart--locale"
                     data-categories="$Categories"
                 ></canvas>
             </div>

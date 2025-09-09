@@ -2,14 +2,22 @@ import Chart from 'chart.js/auto';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Initialize the pie chart
-    const pieChartCanvas = document.querySelector('canvas#acceptRejectRateChart');
-    if (pieChartCanvas) {
+    initPieChart('canvas#acceptRejectRateChart');
+    initPieChart('canvas#acceptRejectRateChart--locale');
+
+    initBarChart('canvas#acceptRejectByCategoryChart');
+    initBarChart('canvas#acceptRejectByCategoryChart--locale');
+
+    function initPieChart(selector) {
+        // Initialize the pie chart
+        const pieChartCanvas = document.querySelector(selector);
+        if (!pieChartCanvas) return;
+
         // Canvas Größe explizit auf eine vernünftige Größe setzen
-        pieChartCanvas.style.width = '400px';
-        pieChartCanvas.style.height = '400px';
-        pieChartCanvas.width = 400;
-        pieChartCanvas.height = 400;
+        pieChartCanvas.style.width = '350px';
+        pieChartCanvas.style.height = '350px';
+        pieChartCanvas.width = 350;
+        pieChartCanvas.height = 350;
 
         // console.log('Pie Chart Canvas size set to:', pieChartCanvas.style.width, 'x', pieChartCanvas.style.height);
 
@@ -39,13 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const barChartCanvas = document.querySelector('canvas#acceptRejectByCategoryChart');
-    if (barChartCanvas) {
+    function initBarChart(selector) {
+        const barChartCanvas = document.querySelector(selector);
+        if (!barChartCanvas) return;
+
+
         // Canvas Größe explizit auf eine vernünftige Größe setzen
         barChartCanvas.style.width = '600px';
-        barChartCanvas.style.height = '400px';
+        barChartCanvas.style.height = '350px';
         barChartCanvas.width = 600;
-        barChartCanvas.height = 400;
+        barChartCanvas.height = 350;
 
         // Categories sind im JSON Format im data Attribut gegeben
         let categories = JSON.parse(barChartCanvas.dataset.categories);
@@ -117,10 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-
-        // console.log('Chart created successfully:', barChart);
-    } else {
-        console.error('Canvas Element nicht gefunden!');
     }
+
 
 });

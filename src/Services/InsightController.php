@@ -75,6 +75,14 @@ class InsightController extends Controller
             'AcceptedCategories' => $data['acceptedCategories'],
         ]);
 
+        if(isset($data['locale'])) {
+            $insight->Locale = $data['locale'];
+        }
+
+        if(isset($data['subsiteId'])) {
+            $insight->SubsiteID = $data['subsiteId'];
+        }
+
         // Save the insight to the database
         if (!$insight->write()) {
             return $this->httpError(500, 'Failed to save insight.');

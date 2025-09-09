@@ -338,6 +338,7 @@ export function handleCookieConsentDialog() {
 
 
         const insightUrl = '/insights/save/';
+
         fetch(insightUrl, {
             method: 'POST',
             mode: 'cors',

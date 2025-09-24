@@ -19,6 +19,10 @@ SilverStripe\ORM\FieldType\DBHTMLText:
   extensions:
     - VanillaCookieConsent\Extensions\IFrameTinyExtension
 
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_javascript:
+    - 'pixelpoems/silverstripe-vanilla-cookieconsent:client/dist/javascript/vanilla-cookie-consent-backend.min.js'
+
 ---
 Only:
   moduleexists: 'tractorcow/silverstripe-fluent'
@@ -27,6 +31,7 @@ SilverStripe\SiteConfig\SiteConfig:
   translate:
     - 'CCActive'
     - 'DisplayOnLogin'
+    - 'SavePeriodForInsights'
     - 'ModalTitle'
     - 'ModalDescription'
     - 'TextBlockTitle'

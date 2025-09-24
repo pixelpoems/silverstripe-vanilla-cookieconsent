@@ -81,6 +81,7 @@ You can configure the cookies via the YML config. The following options are avai
 ```yml
 VanillaCookieConsent\Services\CCService:
   default_lang: 'de' # Default language
+  display_on_login_option: false # If you want to display the cookie consent on login pages enable this to add a checkbox to the siteconfig settings
   # IF you want to configure services:
   categories: # necessary category is added by default
     analytics: [] # no services

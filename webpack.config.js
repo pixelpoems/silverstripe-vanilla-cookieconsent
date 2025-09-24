@@ -19,6 +19,9 @@ module.exports = {
         ],
         "vanilla-cookie-consent-dialog": [
             PATHS.SRC + '/javascript/vanilla-cookie-consent-dialog.js'
+        ],
+        "vanilla-cookie-consent-backend" : [
+            PATHS.SRC + '/javascript/backend.js'
         ]
     },
     output: {

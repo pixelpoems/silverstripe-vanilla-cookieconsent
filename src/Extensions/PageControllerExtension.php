@@ -2,9 +2,7 @@
 
 namespace VanillaCookieConsent\Extensions;
 
-use Pixelpoems\Search\Services\SearchConfig;
 use SilverStripe\Core\Extension;
-use SilverStripe\ORM\DataExtension;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\Requirements;
 use VanillaCookieConsent\Services\CCService;

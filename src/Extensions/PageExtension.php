@@ -3,10 +3,8 @@
 namespace VanillaCookieConsent\Extensions;
 
 use SilverStripe\Core\Extension;
-use SilverStripe\ErrorPage\ErrorPage;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\Tab;
-use SilverStripe\SiteConfig\SiteConfig;
 use VanillaCookieConsent\Services\CCService;
 
 class PageExtension extends Extension
@@ -18,6 +16,11 @@ class PageExtension extends Extension
     private static array $defaults = [
         'HideCookieConsent' => false
     ];
+
+    public function updateCMSFields($fields)
+    {
+        $fields->removeByName('HideCookieConsent');
+    }
 
     public function updateSettingsFields($fields)
     {

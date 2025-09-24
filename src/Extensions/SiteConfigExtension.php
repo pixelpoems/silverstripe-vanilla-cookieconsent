@@ -3,7 +3,6 @@
 namespace VanillaCookieConsent\Extensions;
 
 
-use Page;
 use PageController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Config;
@@ -125,8 +124,8 @@ class SiteConfigExtension extends Extension
         }
 
 
-        if($this->owner->hasExtension(FluentExtension::class)) {
-            $this->owner->updateFluentLocalisedFields($fields);
+        if($this->getOwner()->hasExtension(FluentExtension::class)) {
+            $this->getOwner()->updateFluentLocalisedFields($fields);
         }
     }
 
@@ -145,7 +144,7 @@ class SiteConfigExtension extends Extension
     {
         // Check if the cookie consent modal is active
         if(CCService::config()->get('enable_consent_modal')) {
-            if(!$this->owner->CCActive) return false;
+            if(!$this->getOwner()->CCActive) return false;
 
             $controller = Controller::curr();
             if($controller instanceof PageController) {

@@ -208,7 +208,7 @@ class CCService extends Controller
         }
 
         foreach ($this->getIFrameServices() as $service) {
-            $data['iframeManager']['notices'][$service] = _t('VanillaCookieConsent\IframeManager.Notice_' . $service, 'This content is hosted by a third party. By showing the external content you accept the terms and conditions of ' . strtolower($service) . '.');
+            $data['iframeManager']['notices'][$service] = _t('VanillaCookieConsent\IframeManager.Notice_' . $service, 'This content is hosted by a third party. By showing the external content you accept the terms and conditions of ' . strtolower((string) $service) . '.');
         }
 
         return $data;

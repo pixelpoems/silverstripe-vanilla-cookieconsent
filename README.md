@@ -15,14 +15,17 @@ You can use it with the [Fluent](https://github.com/tractorcow-farm/silverstripe
 
 ## Requirements
 
-* Silverstripe CMS >=4.0
-* Silverstripe Framework >=4.0
-* Versioned Admin >=1.0
+* Silverstripe CMS ^6
+* Silverstripe Framework ^6
 
 ## Installation
 ```
 composer require pixelpoems/silverstripe-vanilla-cookieconsent
 ```
+
+Use Tag `^1` for Silverstripe ^4.0 - ^5.0
+
+For Silverstripe ^6 use Tag `^2`
 
 ## Configuration
 ### Template

@@ -2,12 +2,12 @@
 
 namespace Pixelpoems\VanillaCookieConsent\Elements;
 
+use Override;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use VanillaCookieConsent\Services\CCService;
 
@@ -21,7 +21,7 @@ class IFrameElement extends BaseElement
 
     private static $plural_name = 'IFrame Elements';
 
-    private static $description = 'Shows embedded iframes or self hosted videos';
+    private static $class_description = 'Shows embedded iframes or self hosted videos';
 
     private static $table_name = 'Pixelpoems_IFrameElement';
 
@@ -45,11 +45,13 @@ class IFrameElement extends BaseElement
         'Video',
     ];
 
+    #[Override]
     public function getType(): string
     {
         return 'IFrame Element';
     }
 
+    #[Override]
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -64,22 +66,13 @@ class IFrameElement extends BaseElement
         $allowedEmbeds = CCService::config()->get('iframe_services');
         $allowedEmbedsList = [];
         foreach ($allowedEmbeds as $allowedEmbed) {
-            switch ($allowedEmbed) {
-                case 'googlemaps':
-                    $allowedEmbedsList[$allowedEmbed] = 'Google Maps';
-                    break;
-                case 'youtube':
-                    $allowedEmbedsList[$allowedEmbed] = 'YouTube';
-                    break;
-                case 'vimeo':
-                    $allowedEmbedsList[$allowedEmbed] = 'Vimeo';
-                    break;
-                case 'yumpu':
-                    $allowedEmbedsList[$allowedEmbed] = 'Yumpu';
-                    break;
-                default:
-                    $allowedEmbedsList[$allowedEmbed] = ucfirst($allowedEmbed);
-            }
+            $allowedEmbedsList[$allowedEmbed] = match ($allowedEmbed) {
+                'googlemaps' => 'Google Maps',
+                'youtube' => 'YouTube',
+                'vimeo' => 'Vimeo',
+                'yumpu' => 'Yumpu',
+                default => ucfirst((string) $allowedEmbed),
+            };
         }
         $allowedEmbedsList['self-host'] = 'Self Hosted';
 
@@ -141,7 +134,8 @@ class IFrameElement extends BaseElement
     }
 
 
-    public function getBlockSchema()
+    #[Override]
+    public function getBlockSchema(): array
     {
         $blockSchema = parent::getBlockSchema();
 

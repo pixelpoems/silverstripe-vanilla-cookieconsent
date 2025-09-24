@@ -9,6 +9,7 @@ use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Subsites\Model\Subsite;
 use TractorCow\Fluent\Model\Locale;
 use TractorCow\Fluent\State\FluentState;
 
@@ -41,6 +42,7 @@ class CCService extends Controller
             'categories' => [],
             'enableIFrameManager' => self::config()->get('enable_iframe_manager'),
             'enableConsentModal' => self::config()->get('enable_consent_modal'),
+            'enableInsights' => SiteConfig::current_site_config()->SavePeriodForInsights > 0,
             'language' => [
                 'default' => self::config()->get('default_lang'),
                 'translations' => []
@@ -66,8 +68,11 @@ class CCService extends Controller
         }
 
         // Translations needed for iframemanager and cookie consent
-        if (ModuleLoader::inst()->getManifest()->moduleExists('tractorcow/silverstripe-fluent') && self::config()->get('languages')) {
+        if (ModuleLoader::inst()->getManifest()->moduleExists('tractorcow/silverstripe-fluent')) {
+            $config['language']['locale'] = Locale::getCurrentLocale()->Locale;
+        }
 
+        if (ModuleLoader::inst()->getManifest()->moduleExists('tractorcow/silverstripe-fluent') && self::config()->get('languages')) {
             $currentLocale = Locale::getCurrentLocale();
             $langCode = substr($currentLocale->Locale, 0, 2);
             $config['language']['default'] = $langCode;
@@ -84,6 +89,16 @@ class CCService extends Controller
             $config['language']['translations'][self::config()->get('default_lang')] = [
                 ...$this->getLanguageData()
             ];
+        }
+
+        if(ModuleLoader::inst()->getManifest()->moduleExists('silverstripe/subsites')) {
+            // If subsites is installed, we need to add the current subsite ID to the config
+            $subsiteID = Subsite::currentSubsite()?->ID;
+            if($subsiteID) {
+                $config['subsite']['id'] = $subsiteID;
+            } else {
+                $config['subsite']['id'] = 0; // No subsite = MAIN site
+            }
         }
 
         $this->extend('updateCCJSConfig', $config);

@@ -3,6 +3,7 @@ Name: pp-vanilla-cookieconsent--config
 ---
 VanillaCookieConsent\Services\CCService:
   enable_consent_modal: true
+  display_on_login_option: false # Display the cookie consent modal on login
 #  disable_default_css: false # Disables the default css
 #  disable_default_js: false # Disables the default js
   default_lang: 'de' # Default language for the cookie consent modal
@@ -12,3 +13,37 @@ VanillaCookieConsent\Services\CCService:
   # analytics_cookie_table: # Adds a table with the cookies used for analytics (Needs to match the category) OPTIONAL
   #   _ga: '_ga_location.hostname'
   #   _gat: '_gat_location.hostname'
+
+
+---
+Name: pp-vanilla-cookieconsent--routes
+After: framework/_config/routes#coreroutes
+---
+SilverStripe\Control\Director:
+  rules:
+    'insights//$Action': 'VanillaCookieConsent\Services\InsightController'
+
+
+### Fluent Extensions
+---
+Name: pp-vanilla-cookieconsent--fluent-extensions
+Only:
+  moduleexists: 'tractorcow/silverstripe-fluent'
+---
+VanillaCookieConsent\Models\Insight:
+  db:
+    Locale: 'Varchar(6)'
+  summary_fields:
+    - Locale
+
+### Subsites Extension
+---
+Name: pp-vanilla-cookieconsent--subsites-extensions
+Only:
+  moduleexists: 'silverstripe/subsites'
+---
+VanillaCookieConsent\Models\Insight:
+  has_one:
+    Subsite: 'SilverStripe\Subsites\Model\Subsite'
+  summary_fields:
+    Subsite.Title: 'Subsite'

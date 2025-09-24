@@ -2,16 +2,16 @@
 
 namespace VanillaCookieConsent\Tasks;
 use SilverStripe\Dev\BuildTask;
+use SilverStripe\PolyExecution\PolyOutput;
 use SilverStripe\SiteConfig\SiteConfig;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
 use VanillaCookieConsent\Models\Insight;
 
 class ClearConsentInsightsTask extends BuildTask
 {
 
-    /**
-     * @inheritDoc
-     */
-    public function run($request)
+    protected function execute(InputInterface $input, PolyOutput $output): int
     {
         $savePeriod = SiteConfig::current_site_config()->SavePeriodForInsights;
         $insights = Insight::get();
@@ -20,10 +20,8 @@ class ClearConsentInsightsTask extends BuildTask
             $this->msg('No save period set, skipping task - Insights disabled start to delete all existing insights...');
             $insights->removeAll();
             $this->msg('All existing insights deleted.');
-            return;
+            return Command::SUCCESS;
         }
-
-
 
         $insights = $insights->filter([
             'Created:LessThan' => date('Y-m-d H:i:s', strtotime('-' . $savePeriod . ' days'))
@@ -37,8 +35,7 @@ class ClearConsentInsightsTask extends BuildTask
             $this->msg('No insights older than ' . $savePeriod . ' days found.');
         }
 
-
-
+        return Command::SUCCESS;
     }
 
     protected function msg($msg) {

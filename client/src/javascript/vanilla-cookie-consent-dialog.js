@@ -239,9 +239,6 @@ export function handleCookieConsentDialog() {
                 sendInsightCreate('Partly', acceptedCategoriesString);
                 return;
             }
-
-
-            // do something
         });
     }
 
@@ -336,8 +333,7 @@ export function handleCookieConsentDialog() {
             insightData.subsiteId = consentConfig.subsite.id;
         }
 
-
-        const insightUrl = '/insights/save/';
+        const insightUrl = '/insights/save';
 
         fetch(insightUrl, {
             method: 'POST',
@@ -345,7 +341,7 @@ export function handleCookieConsentDialog() {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(insightData),
         })

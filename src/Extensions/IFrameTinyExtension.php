@@ -11,7 +11,7 @@ use VanillaCookieConsent\Services\CCService;
 class IFrameTinyExtension extends Extension
 {
 
-    public function Embeded()
+    public function Embedded()
     {
         // Suppress XML encoding for DBHtmlText
         $forTemplate = $this->getOwner();

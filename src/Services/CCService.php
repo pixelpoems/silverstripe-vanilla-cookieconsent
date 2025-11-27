@@ -3,6 +3,7 @@
 namespace VanillaCookieConsent\Services;
 
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Core\Manifest\ModuleLoader;
@@ -86,6 +87,7 @@ class CCService extends Controller
 
         } else {
             // No fluent we use the default language
+            i18n::set_locale($this->getLocaleFromLang(self::config()->get('default_lang')));
             $config['language']['translations'][self::config()->get('default_lang')] = [
                 ...$this->getLanguageData()
             ];
@@ -104,6 +106,19 @@ class CCService extends Controller
         $this->extend('updateCCJSConfig', $config);
 
         return json_encode($config, JSON_OBJECT_AS_ARRAY);
+    }
+
+    private function getLocaleFromLang($lang) {
+        $locales = i18n::getData()->getLocales();
+
+        foreach ($locales as $locale) {
+            if (strpos($locale, $lang . '_') === 0) {
+                return $locale;
+            }
+        }
+
+        // Fallback to common locale
+        return $lang . '_' . strtoupper($lang);
     }
 
     private function getLanguageData(): array

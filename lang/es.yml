@@ -17,10 +17,10 @@ es:
   VanillaCookieConsent\IframeManager:
     LoadBtn: 'Cargar una vez'
     LoadAllBtn: 'No volver a preguntar'
-    Notice_googlemaps: 'Este contenido está alojado por un tercero. Al mostrar el contenido externo, acepta la <a rel="noreferrer noopener" href="https://www.google.com/policies/privacy/" target="_blank">política de privacidad</a> de google.com.'
-    Notice_youtube: 'Este contenido está alojado por un tercero. Al mostrar el contenido externo, acepta los <a rel="noreferrer noopener" href="https://www.youtube.com/t/terms" target="_blank">términos de uso</a> de youtube.com.'
-    Notice_vimeo: 'Este contenido está alojado por un tercero. Al mostrar el contenido externo, acepta los <a rel="noreferrer noopener" href="https://vimeo.com/terms" target="_blank">términos de uso</a> de vimeo.com.'
-    Notice_yumpu: 'Este contenido está alojado por un tercero. Al mostrar el contenido externo, acepta la <a rel="noreferrer noopener" href="https://www.yumpu.com/en/info/privacy_policy" target="_blank">política de privacidad</a> de yumpu.com.'
+    Notice_googlemaps: 'Este contenido está alojado por un tercero. Al mostrar el contenido externo, acepta la <a rel="noreferrer noopener" href="https://www.google.com/policies/privacy/" target="_blank">política de privacidad</a> google.com.'
+    Notice_youtube: 'Este contenido está alojado por un tercero. Al mostrar el contenido externo, acepta los <a rel="noreferrer noopener" href="https://www.youtube.com/t/terms" target="_blank">términos de uso</a> youtube.com.'
+    Notice_vimeo: 'Este contenido está alojado por un tercero. Al mostrar el contenido externo, acepta los <a rel="noreferrer noopener" href="https://vimeo.com/terms" target="_blank">términos de uso</a> vimeo.com.'
+    Notice_yumpu: 'Este contenido está alojado por un tercero. Al mostrar el contenido externo, acepta la <a rel="noreferrer noopener" href="https://www.yumpu.com/en/info/privacy_policy" target="_blank">política de privacidad</a> yumpu.com.'
   VanillaCookieConsent\CookieTable:
     Cookie: 'Cookie'
     Domain: 'Dominio'

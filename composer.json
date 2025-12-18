@@ -20,8 +20,8 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
-        "silverstripe/cms": "^6",
-        "silverstripe/framework": "^6"
+        "silverstripe/cms": "^4.0 || ^5.0",
+        "silverstripe/framework": "^4.0 || ^5.0"
     },
     "autoload": {
         "psr-4": {
@@ -31,7 +31,7 @@
     "extra": {
         "installer-name": "silverstripe-vanilla-cookieconsent",
         "branch-alias": {
-            "dev-main": "2.x-dev"
+            "dev-main": "1.x-dev"
         },
         "tag-alias": {
             "1.0@dev": "1.0.0"

@@ -2,7 +2,6 @@
 
 namespace Pixelpoems\VanillaCookieConsent\Elements;
 
-use Override;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
@@ -21,7 +20,7 @@ class IFrameElement extends BaseElement
 
     private static $plural_name = 'IFrame Elements';
 
-    private static $class_description = 'Shows embedded iframes or self hosted videos';
+    private static $description = 'Shows embedded iframes or self hosted videos';
 
     private static $table_name = 'Pixelpoems_IFrameElement';
 
@@ -45,13 +44,11 @@ class IFrameElement extends BaseElement
         'Video',
     ];
 
-    #[Override]
     public function getType(): string
     {
         return 'IFrame Element';
     }
 
-    #[Override]
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -134,7 +131,6 @@ class IFrameElement extends BaseElement
     }
 
 
-    #[Override]
     public function getBlockSchema(): array
     {
         $blockSchema = parent::getBlockSchema();

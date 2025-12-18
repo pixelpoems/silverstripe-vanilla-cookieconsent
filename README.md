@@ -17,8 +17,8 @@ You can use it with the [Fluent](https://github.com/tractorcow-farm/silverstripe
 
 ## Requirements
 
-* Silverstripe CMS ^6
-* Silverstripe Framework ^6
+* Silverstripe CMS >=4.0
+* Silverstripe Framework >=4.0
 
 ## Installation
 ```

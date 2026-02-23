@@ -18,6 +18,12 @@ class InsightController extends Controller
         'save',
     ];
 
+    private static array $url_handlers = [
+        'GET index' => 'index',
+        'GET getInsights' => 'getInsights',
+        'POST save' => 'save',
+    ];
+
     public function index()
     {
         return $this->renderWith('VanillaCookieConsent/InsightController');

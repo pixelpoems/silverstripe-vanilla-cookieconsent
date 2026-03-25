@@ -43,9 +43,9 @@ export function handleCookieConsentDialog() {
         }
     }
 
+    let iframemanagerConfigServices = {};
     if(consentConfig.enableIFrameManager &&  window.iframemanager()) {
         // Add iframemanager services to config
-        let iframemanagerConfigServices = {};
         let iframeLangStrings = consentConfig.language.translations[consentConfig.language.default].iframeManager;
 
         // If no services but manager is enabled - we add all
@@ -122,33 +122,7 @@ export function handleCookieConsentDialog() {
         }
 
         // Initialize iframemanager
-        setTimeout(() => {
-            window.iframemanager().run({
-                onChange: ({ changedServices, eventSource }) => {
-                    if (eventSource.type === 'click') {
-                        // console.log('Changed services:', changedServices);
-                        for (const category in categories) {
-                            if(category) {
-
-                                let servicesToAccept = [];
-                                if(consentConfig.enableConsentModal) {
-                                    servicesToAccept = [
-                                        ...CookieConsent.getUserPreferences().acceptedServices[category],
-                                        ...changedServices,
-                                    ];
-                                } else servicesToAccept = [...changedServices];
-
-                                CookieConsent.acceptService(servicesToAccept, category);
-                                // ToDo: send insight for accepted services
-                            }
-                        }
-                    }
-                },
-                currLang: consentConfig.language.default,
-                // data-title is added to the iframe container threw data-title attribute
-                services: iframemanagerConfigServices ?? [],
-            });
-        }, 500);
+        setTimeout(initIFrameManager, 500);
 
         // Setup for cc to accept/reject iframemanager services
         for (const category in categories) {
@@ -242,6 +216,34 @@ export function handleCookieConsentDialog() {
         });
     }
 
+    function initIFrameManager() {
+        window.iframemanager().run({
+            onChange: ({ changedServices, eventSource }) => {
+                if (eventSource.type === 'click') {
+                    // console.log('Changed services:', changedServices);
+                    for (const category in categories) {
+                        if(category) {
+
+                            let servicesToAccept = [];
+                            if(consentConfig.enableConsentModal) {
+                                servicesToAccept = [
+                                    ...CookieConsent.getUserPreferences().acceptedServices[category],
+                                    ...changedServices,
+                                ];
+                            } else servicesToAccept = [...changedServices];
+
+                            CookieConsent.acceptService(servicesToAccept, category);
+                            // ToDo: send insight for accepted services
+                        }
+                    }
+                }
+            },
+            currLang: consentConfig.language.default,
+            // data-title is added to the iframe container threw data-title attribute
+            services: iframemanagerConfigServices ?? [],
+        });
+    }
+
     // This initializes the accept buttons in the consent dialog
     function initAcceptButtons() {
         const acceptBtns = consentDialog.querySelectorAll('[data-cc-accept]');
@@ -316,6 +318,8 @@ export function handleCookieConsentDialog() {
             })
         })
     }
+
+    window.initIFrameManager = initIFrameManager;
 
     function sendInsightCreate(consentType, acceptedCategories) {
         if(!consentConfig.enableInsights) return;

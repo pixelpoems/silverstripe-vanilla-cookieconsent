@@ -29,7 +29,6 @@ Only:
 ---
 SilverStripe\SiteConfig\SiteConfig:
   translate:
-    - 'CCActive'
     - 'DisplayOnLogin'
     - 'SavePeriodForInsights'
     - 'ModalTitle'

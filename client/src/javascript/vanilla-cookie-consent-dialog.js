@@ -339,7 +339,7 @@ export function handleCookieConsentDialog() {
 
         const insightUrl = '/insights/save/';
 
-        console.log('Sending insight data:', insightData);
+        // console.log('Sending insight data:', insightData);
 
         fetch(insightUrl, {
             method: 'POST',
@@ -354,12 +354,12 @@ export function handleCookieConsentDialog() {
         .then(response => {
             // Check if response is 201
             if (response.status === 201) {
-                console.log('Insight created successfully');
+                // console.log('Insight created successfully');
             } else {
-                console.error('Failed to create insight:', response.statusText);
+                // console.error('Failed to create insight:', response.statusText);
             }
         }).catch(error => {
-            console.error('Error creating insight:', error);
+            // console.error('Error creating insight:', error);
         })
 
     }

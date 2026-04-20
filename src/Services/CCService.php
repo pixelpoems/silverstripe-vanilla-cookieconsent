@@ -173,13 +173,15 @@ class CCService extends Controller
             }
 
             $categories = self::config()->get('categories') ?: [];
-            $categories = array_merge(['necessary'], $categories);
+            if (array_is_list($categories)) {
+                // List format (e.g. [- video]): prepend 'necessary', then convert to associative
+                array_unshift($categories, 'necessary');
+                $categories = array_fill_keys($categories, []);
+            } else {
+                // Associative format (e.g. video: [youtube, vimeo]): merge 'necessary' as key
+                $categories = array_merge(['necessary' => []], $categories);
+            }
             if($categories) {
-
-                if (array_is_list($categories)) {
-                    // Convert list-style array into an associative array with empty arrays as values
-                    $categories = array_fill_keys($categories, []);
-                }
 
                 foreach ($categories as $category => $services) {
 

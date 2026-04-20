@@ -176,7 +176,10 @@ class SiteConfigExtension extends Extension
             }
         }
 
-        $categories = CCService::config()->get('categories');
+        $categories = CCService::config()->get('categories') ?: [];
+        if (!array_is_list($categories)) {
+            $categories = array_keys($categories);
+        }
 
         $categoriesForTemplate = [];
 
@@ -235,7 +238,10 @@ class SiteConfigExtension extends Extension
             }
         }
 
-        $categories = CCService::config()->get('categories');
+        $categories = CCService::config()->get('categories') ?: [];
+        if (!array_is_list($categories)) {
+            $categories = array_keys($categories);
+        }
 
         $categoriesForTemplate = [];
 

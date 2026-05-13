@@ -14,7 +14,7 @@ class Insight extends DataObject
 
     private static $db = [
         'Timestamp' => 'Datetime',
-        'ConsentType' => 'Enum("Accepted,Rejected,Partly,Unnown", "Unnown")',
+        'ConsentType' => 'Enum("Accepted,Rejected,Partly,Unknown", "Unknown")',
         'AcceptedCategories' => 'Varchar(255)',
     ];
 

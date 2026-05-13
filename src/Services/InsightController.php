@@ -14,32 +14,17 @@ class InsightController extends Controller
 
     private static $allowed_actions = [
         'index',
-        'getInsights',
         'save',
     ];
 
     private static array $url_handlers = [
         'GET index' => 'index',
-        'GET getInsights' => 'getInsights',
         'POST save' => 'save',
     ];
 
     public function index()
     {
         return $this->renderWith('VanillaCookieConsent/InsightController');
-    }
-
-    public function getInsights()
-    {
-        // This method should return insights data, typically from a model or service.
-        // For now, we will return a placeholder response.
-        return json_encode([
-            'insights' => [
-                ['timestamp' => '2023-10-01 12:00:00', 'consentType' => 'Essential'],
-                ['timestamp' => '2023-10-01 12:05:00', 'consentType' => 'Analytics'],
-                ['timestamp' => '2023-10-01 12:10:00', 'consentType' => 'Marketing'],
-            ],
-        ]);
     }
 
     /**

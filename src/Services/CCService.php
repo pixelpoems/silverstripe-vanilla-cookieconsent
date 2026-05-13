@@ -2,7 +2,6 @@
 
 namespace VanillaCookieConsent\Services;
 
-use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
@@ -14,7 +13,7 @@ use SilverStripe\Subsites\Model\Subsite;
 use TractorCow\Fluent\Model\Locale;
 use TractorCow\Fluent\State\FluentState;
 
-class CCService extends Controller
+class CCService
 {
     use Injectable;
     use Configurable;

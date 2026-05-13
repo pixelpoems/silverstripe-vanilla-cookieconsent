@@ -184,32 +184,24 @@ export function handleCookieConsentDialog() {
         }, 500);
 
         window.addEventListener('cc:onFirstConsent', ({detail}) => {
-            let acceptedCategoriesString = detail.cookie.categories.join(',');
+            const acceptedCategories = detail.cookie.categories; // array of accepted category names
+            const acceptedCategoriesString = acceptedCategories.join(',');
 
-
-            // Check the categories accepted
-            // If only nessary category is accepted
-            if (detail.cookie.categories.necessary && Object.keys(detail.cookie.categories).length === 1 || acceptedCategoriesString === 'necessary') {
-                // Only necessary category is accepted
+            // Only necessary accepted → Rejected
+            if (acceptedCategories.length === 1 && acceptedCategories[0] === 'necessary') {
                 sendInsightCreate('Rejected', 'necessary');
                 return;
             }
 
-            // If all categories are accepted
-            if (Object.keys(detail.cookie.categories).length === Object.keys(categories).length) {
-                // All categories are accepted
+            // All categories accepted → Accepted
+            if (acceptedCategories.length === Object.keys(categories).length) {
                 sendInsightCreate('Accepted', 'all');
                 return;
             }
 
-            // If not all categories are accepted and not only necessary
-            // Check if specific categories are accepted
-            // We filter out the 'necessary' category as it is always accepted
-            // and we want to know if any other categories are accepted
-            // If no specific categories are accepted, we consider it as rejected
-            const acceptedCategories = Object.keys(detail.cookie.categories).filter(cat => cat !== 'necessary' && detail.cookie.categories[cat]);
-            if (acceptedCategories.length > 0) {
-                // Specific categories are accepted
+            // Some (but not all) non-necessary categories accepted → Partly
+            const nonNecessaryAccepted = acceptedCategories.filter(cat => cat !== 'necessary');
+            if (nonNecessaryAccepted.length > 0) {
                 sendInsightCreate('Partly', acceptedCategoriesString);
                 return;
             }

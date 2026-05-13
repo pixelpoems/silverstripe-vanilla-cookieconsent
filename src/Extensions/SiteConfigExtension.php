@@ -8,6 +8,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Manifest\ModuleLoader;
+use SilverStripe\ErrorPage\ErrorPage;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;

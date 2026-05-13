@@ -63,7 +63,8 @@ After:
   - 'pp-vanilla-cookieconsent--config'
 ---
 VanillaCookieConsent\Services\CCService:
-  default_lang: 'de' # Default language for the consent modal
+  default_lang: 'en' # Default language for the consent modal
+  # languages: ['de', 'en'] # Required when using tractorcow/silverstripe-fluent — list all active locales as 2-letter codes
   display_on_login_option: false # Adds a "display on login pages" checkbox to SiteConfig when enabled
   enable_consent_modal: true # Show the cookie consent modal (default: true)
   enable_iframe_manager: false # Enable iframemanager for embedded content (default: false)

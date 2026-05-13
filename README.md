@@ -28,6 +28,7 @@ For Silverstripe ^6 use Tag `^2`
 * [iFrames](docs/iframes.md) — iFrameManager setup, dynamic loading, DNA Design element
 * [Custom Styling](docs/custom-styling.md) — Overwriting default styles
 * [Translations](docs/translations.md) — Adding or overwriting translations
+* [Fluent Integration](docs/fluent.md) — Multi-language setup with tractorcow/silverstripe-fluent
 
 ## Reporting Issues
 

@@ -18,3 +18,9 @@ SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - 'TractorCow\Fluent\Extension\FluentExtension'
 ```
+
+When using Fluent, you also need to configure the `languages` setting so the module knows which locales are active. Without this, the module falls back to `default_lang` only and ignores the current Fluent locale:
+```yml
+VanillaCookieConsent\Services\CCService:
+  languages: ['de', 'en'] # list all active locales as 2-letter codes
+```

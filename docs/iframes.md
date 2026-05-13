@@ -31,9 +31,10 @@ VanillaCookieConsent\Services\CCService:
 Also add a video category to your consent categories so the consent can handle the services:
 ```yml
 VanillaCookieConsent\Services\CCService:
-  video: # Category for video services
-    - youtube # make sure it's written like the services above
-    - vimeo
+  categories:
+    video: # Category for video services
+      - youtube # make sure it's written like the services above
+      - vimeo
 ```
 
 So your full config for the iframe looks like this:

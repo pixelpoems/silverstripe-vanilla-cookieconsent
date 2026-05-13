@@ -4,9 +4,9 @@ namespace VanillaCookieConsent\Services;
 
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Configurable;
+use SilverStripe\Core\Extensible;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Core\Manifest\ModuleLoader;
-use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Subsites\Model\Subsite;
@@ -15,6 +15,7 @@ use TractorCow\Fluent\State\FluentState;
 
 class CCService
 {
+    use Extensible;
     use Injectable;
     use Configurable;
 
@@ -76,8 +77,6 @@ class CCService
             $currentLocale = Locale::getCurrentLocale();
             $langCode = substr($currentLocale->Locale, 0, 2);
             $config['language']['default'] = $langCode;
-            i18n::set_locale($langCode);
-
 
             $config['language']['translations'][$langCode] = FluentState::singleton()->withState(function ($state) use ($currentLocale) {
                 $state->setLocale($currentLocale->Locale);
@@ -85,8 +84,6 @@ class CCService
             });
 
         } else {
-            // No fluent we use the default language
-            i18n::set_locale($this->getLocaleFromLang(self::config()->get('default_lang')));
             $config['language']['translations'][self::config()->get('default_lang')] = [
                 ...$this->getLanguageData()
             ];
@@ -105,19 +102,6 @@ class CCService
         $this->extend('updateCCJSConfig', $config);
 
         return json_encode($config, JSON_OBJECT_AS_ARRAY);
-    }
-
-    private function getLocaleFromLang($lang) {
-        $locales = i18n::getData()->getLocales();
-
-        foreach ($locales as $locale) {
-            if (strpos($locale, $lang . '_') === 0) {
-                return $locale;
-            }
-        }
-
-        // Fallback to common locale
-        return $lang . '_' . strtoupper($lang);
     }
 
     private function getLanguageData(): array

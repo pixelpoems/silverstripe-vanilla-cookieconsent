@@ -56,6 +56,8 @@ VanillaCookieConsent\Services\CCService:
 
 You can configure the cookies via the YML config. The following options are available:
 
+> **Note:** Without Fluent, the module uses Silverstripe's active locale for all translated strings. Make sure `i18n.default_locale` in your project config matches your `default_lang` setting (e.g. `default_lang: 'de'` requires `SilverStripe\i18n\i18n: default_locale: de_DE`). See [Fluent Integration](fluent.md) for multi-language setups.
+
 ```yml
 ---
 Name: app-cookieconsent-config
@@ -63,7 +65,7 @@ After:
   - 'pp-vanilla-cookieconsent--config'
 ---
 VanillaCookieConsent\Services\CCService:
-  default_lang: 'en' # Default language for the consent modal
+  default_lang: 'en' # Default language for the JS consent modal — must match your i18n.default_locale (e.g. 'de' for de_DE)
   # languages: ['de', 'en'] # Required when using tractorcow/silverstripe-fluent — list all active locales as 2-letter codes
   display_on_login_option: false # Adds a "display on login pages" checkbox to SiteConfig when enabled
   enable_consent_modal: true # Show the cookie consent modal (default: true)

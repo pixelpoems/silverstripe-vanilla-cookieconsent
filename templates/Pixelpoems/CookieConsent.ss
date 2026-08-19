@@ -1,14 +1,13 @@
 <% if $SiteConfig.shouldIncludeDialog %>
     <dialog id="dialog__cookieconsent" data-cc-config="$CCJSConfig">
         <div class="cookieconsent__content">
-            <h2>
+            <div class="cookieconsent__title">
                 <% if $SiteConfig.ModalTitle %>
                     $SiteConfig.ModalTitle
                 <% else %>
                     <%t VanillaCookieConsent\ConsentModal.Title 'We use cookies' %>
                 <% end_if %>
-
-            </h2>
+            </div>
 
             <p>
                 <% if $SiteConfig.ModalDescription %>
